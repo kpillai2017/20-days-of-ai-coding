@@ -65,6 +65,55 @@ function createGrid(rows, cols) {
 }
 
 /**
+ * Validates that a grid is a non-empty rectangular array with numeric 0/1 values.
+ * Rejects sparse arrays, non-array rows, empty grids, and non-numeric values.
+ *
+ * @param {number[][]} grid - The grid to validate
+ * @throws {Error} If grid is invalid
+ * @private
+ */
+function validateGrid(grid) {
+  // Check if grid is an array
+  if (!Array.isArray(grid)) {
+    throw new Error('grid must be a non-empty array');
+  }
+
+  // Check if grid is non-empty
+  if (grid.length === 0) {
+    throw new Error('grid must be a non-empty array');
+  }
+
+  // Check first row exists and is a non-empty array
+  if (!Array.isArray(grid[0]) || grid[0].length === 0) {
+    throw new Error('grid rows must be non-empty arrays');
+  }
+
+  // Verify all rows have the same length (rectangular grid)
+  const expectedCols = grid[0].length;
+  for (let i = 0; i < grid.length; i++) {
+    const row = grid[i];
+
+    // Check row is an array
+    if (!Array.isArray(row)) {
+      throw new Error('grid rows must be arrays');
+    }
+
+    // Check row length is consistent (reject ragged arrays)
+    if (row.length !== expectedCols) {
+      throw new Error('all rows must have the same length');
+    }
+
+    // Check all values are numeric 0 or 1 (reject sparse arrays and non-numeric)
+    for (let j = 0; j < row.length; j++) {
+      const cell = row[j];
+      if (!Number.isInteger(cell) || (cell !== 0 && cell !== 1)) {
+        throw new Error('all cells must be numeric 0 or 1');
+      }
+    }
+  }
+}
+
+/**
  * Counts the number of living neighbors for a cell at the given position.
  * Neighbors are the 8 surrounding cells. Edges beyond the grid are considered dead.
  *
@@ -125,21 +174,8 @@ function countNeighbors(grid, row, col) {
  * //  [0,0,0]]
  */
 function nextGeneration(grid) {
-  // Validate grid
-  if (!Array.isArray(grid) || grid.length === 0) {
-    throw new Error('grid must be a non-empty array');
-  }
-  if (!Array.isArray(grid[0]) || grid[0].length === 0) {
-    throw new Error('grid rows must be non-empty arrays');
-  }
-
-  // Verify all rows have the same length (rectangular grid)
-  const expectedCols = grid[0].length;
-  for (let i = 0; i < grid.length; i++) {
-    if (grid[i].length !== expectedCols) {
-      throw new Error('all rows must have the same length');
-    }
-  }
+  // Validate grid using consolidated validation
+  validateGrid(grid);
 
   const rows = grid.length;
   const cols = grid[0].length;
@@ -187,18 +223,13 @@ function nextGeneration(grid) {
  * countLiving(grid); // Returns 3
  */
 function countLiving(grid) {
-  // Validate grid
-  if (!Array.isArray(grid) || grid.length === 0) {
-    throw new Error('grid must be a non-empty array');
-  }
+  // Validate grid using consolidated validation
+  validateGrid(grid);
 
   let count = 0;
 
   // Sum all living cells
   for (let r = 0; r < grid.length; r++) {
-    if (!Array.isArray(grid[r])) {
-      throw new Error('grid rows must be arrays');
-    }
     for (let c = 0; c < grid[r].length; c++) {
       count += grid[r][c];
     }
@@ -256,15 +287,15 @@ const patterns = {
 
 /**
  * Stamps a pattern with its top-left reference point at the given coordinates.
- * The pattern's (0,0) offset is placed at (centerRow, centerCol).
- * Despite their names, these parameters specify an origin, not a centre;
+ * The pattern's (0,0) offset is placed at (startRow, startCol).
+ * These parameters specify the top-left origin, not the pattern's centre;
  * app.js calculates the origin needed to centre a pattern on the board.
  * This function creates and returns a NEW grid with the pattern applied,
  * leaving all other cells unchanged.
  *
  * @param {number[][]} grid - The grid to stamp the pattern onto (not modified)
- * @param {number} centerRow - Grid row where pattern center is placed
- * @param {number} centerCol - Grid column where pattern center is placed
+ * @param {number} startRow - Grid row where pattern origin is placed
+ * @param {number} startCol - Grid column where pattern origin is placed
  * @param {number[][]} coordinates - Array of [row, col] pairs defining the pattern
  * @returns {number[][]} A new grid with the pattern stamped in
  * @throws {Error} If parameters are invalid
@@ -274,16 +305,29 @@ const patterns = {
  * const withBlock = stampPattern(grid, 1, 1, patterns.BLOCK);
  * // Results in a 2x2 block of live cells starting at [1,1]
  */
-function stampPattern(grid, centerRow, centerCol, coordinates) {
-  // Validate input
-  if (!Array.isArray(grid) || grid.length === 0) {
-    throw new Error('grid must be a non-empty array');
+function stampPattern(grid, startRow, startCol, coordinates) {
+  // Validate grid using consolidated validation
+  validateGrid(grid);
+
+  // Validate position parameters
+  if (!Number.isInteger(startRow) || !Number.isInteger(startCol)) {
+    throw new Error('startRow and startCol must be integers');
   }
-  if (!Number.isInteger(centerRow) || !Number.isInteger(centerCol)) {
-    throw new Error('centerRow and centerCol must be integers');
-  }
+
+  // Validate coordinates array
   if (!Array.isArray(coordinates)) {
     throw new Error('coordinates must be an array');
+  }
+
+  // Validate each coordinate pair before processing
+  for (let i = 0; i < coordinates.length; i++) {
+    const coord = coordinates[i];
+    if (!Array.isArray(coord) || coord.length !== 2) {
+      throw new Error('each coordinate must be an array of [row, col]');
+    }
+    if (!Number.isInteger(coord[0]) || !Number.isInteger(coord[1])) {
+      throw new Error('each coordinate must contain integers');
+    }
   }
 
   const rows = grid.length;
@@ -295,18 +339,14 @@ function stampPattern(grid, centerRow, centerCol, coordinates) {
   // Stamp each coordinate of the pattern
   for (let i = 0; i < coordinates.length; i++) {
     const coord = coordinates[i];
-    if (!Array.isArray(coord) || coord.length !== 2) {
-      throw new Error('each coordinate must be an array of [row, col]');
-    }
-
     const patternRow = coord[0];
     const patternCol = coord[1];
 
     // Calculate the actual grid position
-    const gridRow = centerRow + patternRow;
-    const gridCol = centerCol + patternCol;
+    const gridRow = startRow + patternRow;
+    const gridCol = startCol + patternCol;
 
-    // Only place the cell if it's within grid bounds
+    // Only place the cell if it's within grid bounds (clipping at boundaries)
     if (gridRow >= 0 && gridRow < rows && gridCol >= 0 && gridCol < cols) {
       newGrid[gridRow][gridCol] = 1;
     }

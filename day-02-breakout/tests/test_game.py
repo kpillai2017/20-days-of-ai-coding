@@ -213,6 +213,23 @@ class GameTests(unittest.TestCase):
         self.assertAlmostEqual(a.ball.y, b.ball.y)
         self.assertAlmostEqual(a.paddle.x, b.paddle.x)
 
+    def test_named_settings_drive_reset_launch_and_scoring(self):
+        # Patch settings to prove the implementation reads them, rather than
+        # merely defining constants while still using hardcoded values.
+        from unittest.mock import patch
+        import game as model
+        with patch.multiple(model, BALL_SPEED=400, INITIAL_LIVES=5, POINTS_PER_BRICK=7):
+            g = Game()
+            self.assertEqual(g.lives, 5)
+            g.launch()
+            self.assertAlmostEqual(math.hypot(g.vx, g.vy), 400)
+            g.bricks = [Rect(300, 250, 68, 20)]
+            g.ball.x, g.ball.y, g.vx, g.vy = 320, 237, 0, 200
+            g.update(0.02)
+            self.assertEqual(g.score, 7)
+            g.reset()
+            self.assertEqual((g.score, g.lives), (0, 5))
+
     def test_independent_instances(self):
         self.game.bricks.clear()
         self.assertEqual(len(Game().bricks), 50)

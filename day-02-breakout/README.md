@@ -83,6 +83,18 @@ ready --Space--> playing --last brick--> won
 R from any state: reset everything and return to ready
 ```
 
+#### Authoritative gameplay constants
+
+`game.py` defines shared gameplay and brick-layout values as module-level constants to prevent disagreement between the model and renderer:
+
+- **Gameplay**: `BALL_SPEED` (340 px/sec), `PADDLE_SPEED` (460 px/sec), `BALL_SIZE` (12×12 square), `INITIAL_LIVES` (3), `POINTS_PER_BRICK` (10).
+- **Physics timing**: `MAX_FRAME_DT` (0.1 sec cap), `MAX_PHYSICS_STEP` (1/240 sec substep).
+- **Brick layout**: `BRICK_ROWS` (5), `BRICK_COLS` (10), `BRICK_WIDTH` (68), `BRICK_HEIGHT` (20), `BRICK_TOP` (90), `BRICK_GAP_X` (8), `BRICK_GAP_Y` (8), and computed `BRICK_START_X` for horizontal centering.
+
+`main.py` imports `BRICK_TOP`, `BRICK_HEIGHT`, `BRICK_GAP_Y` to compute brick row colours consistently with the model's layout.
+
+#### Game methods
+
 - `reset()` creates a fresh level and restores three lives and zero score.
 - `_prepare_serve()` resets only the ball, preserving your progress after a miss. A leading underscore conventionally means an internal helper.
 - `launch()` gives the ready ball an upward-right velocity.
@@ -90,7 +102,7 @@ R from any state: reset everything and return to ready
 - `_physics_step(dt)` moves the ball and handles walls, misses, paddle and bricks.
 - `_check_paddle_collision()` accepts only a downward crossing of the paddle's top.
 - `_resolve_paddle_collision()` changes the bounce angle based on where the ball hit.
-- `_check_brick_collisions()` removes a hit brick, adds 10 points and reverses the appropriate velocity component.
+- `_check_brick_collisions()` removes a hit brick, awards `POINTS_PER_BRICK` and reverses the appropriate velocity component.
 
 ### Delta time and small steps
 
@@ -124,7 +136,9 @@ The loop follows **events → update → draw**:
 4. `draw_game()` draws rectangles, counters and state prompts.
 5. `pygame.display.flip()` presents the completed frame.
 
-The model retains floating-point positions for smooth motion; drawing rounds to whole pixels. `draw_text()` renders text to an image surface and **blits** (copies) it to the window. Fonts come from pygame, not your filesystem. Only display/font modules are initialised because the game doesn't need audio. A `finally` block closes pygame even if an error occurs.
+The model retains floating-point positions for smooth motion; drawing rounds to whole pixels. `draw_text()` renders text to an image surface and **blits** (copies) it to the window. `draw_body()` is a helper that converts a model `Rect` (with float coordinates) to a pygame `Rect` (with integer pixel coordinates) and draws it with rounded corners. Fonts come from pygame, not your filesystem. Only display/font modules are initialised because the game doesn't need audio. A `finally` block closes pygame even if an error occurs.
+
+Brick row colours are determined by each brick's Y position and the shared layout constants (`BRICK_TOP`, `BRICK_HEIGHT`, `BRICK_GAP_Y`), so colour assignments remain consistent with the model's brick layout even after bricks are removed.
 
 The `if __name__ == "__main__"` guard means importing `main.py` for tests won't open a window.
 
@@ -183,7 +197,19 @@ Remove-Item Env:SDL_VIDEODRIVER
 - **Window seems frozen:** it may be paused. Check the on-screen prompt.
 - **Can't find `main.py`:** run commands from `day-02-breakout`, not the repository root.
 
-## 6. Try a small change
+## 6. Tuning the game
+
+Shared gameplay parameters live at the top of `game.py`; paddle geometry is defined in `Game.__init__()`. Because `main.py` imports layout constants, changes to brick size or spacing update both model and renderer automatically:
+
+- **Ball and paddle**: Increase `BALL_SPEED` for a harder game; increase `PADDLE_SPEED` for easier control. Larger `BALL_SIZE` makes collisions easier to see.
+- **Difficulty and scoring**: Fewer `INITIAL_LIVES` make the game harder. `POINTS_PER_BRICK` changes the score, not the difficulty.
+- **Layout**: Adjust `BRICK_ROWS`, `BRICK_COLS`, `BRICK_WIDTH`, `BRICK_HEIGHT`, `BRICK_GAP_X`, `BRICK_GAP_Y` and the gaps around the paddle.
+- **Physics**: Decrease `MAX_PHYSICS_STEP` (e.g., to 1/480) if higher speeds tunnel through thin bricks. Keep `MAX_FRAME_DT` small: raising it adds catch-up work after a stall.
+- **Tests**: Some acceptance tests intentionally encode the default game settings. When changing the design, update those expectations as well as rerunning the suite.
+
+Always run the test suite after tuning to ensure the model and renderer still agree on positions and timing.
+
+## 7. Try a small change
 
 1. Change the five row colours in `main.py`.
 2. Change the paddle width, then test that its centre and edge clamps still work.
@@ -191,9 +217,16 @@ Remove-Item Env:SDL_VIDEODRIVER
 4. Add a session high score. Decide whether R resets it before coding.
 5. Add sound later; initialise the mixer only when you need it.
 
-## References and attribution
+## 8. References and attribution
 
 This is an original educational implementation inspired by the classic Breakout game, not a reproduction of its source or artwork.
+
+**Architecture notes:**
+
+- Constants in `game.py` prevent the model and renderer disagreeing on speed, size, scoring or layout. This pattern scales to larger games.
+- Previous position (`_prev_ball_x`, `_prev_ball_y`) detects collision entry direction without per-frame flags or separate broad/narrow phases.
+- Small physics steps (1/240 sec) and a clamped frame delta avoid tunnelling without a full continuous-collision-detection system.
+- String states (`"ready"`, `"playing"`, etc.) stay readable; enums add type safety but not simplicity for a small game.
 
 - [pygame: Getting Started](https://www.pygame.org/docs/)
 - [pygame: a basic game loop](https://www.pygame.org/docs/ref/pygame.html#quick-start)

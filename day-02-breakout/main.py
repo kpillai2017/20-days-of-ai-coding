@@ -13,7 +13,7 @@ os.environ.setdefault("PYGAME_HIDE_SUPPORT_PROMPT", "1")
 
 import pygame
 
-from game import Game, HEIGHT, WIDTH
+from game import Game, HEIGHT, WIDTH, BRICK_TOP, BRICK_HEIGHT, BRICK_GAP_Y
 
 BACKGROUND = (12, 17, 23)
 PANEL = (22, 32, 43)
@@ -34,6 +34,15 @@ def draw_text(surface, font, text, position, color=TEXT, centered=False):
     surface.blit(image, rect)
 
 
+def draw_body(surface, color, body, border_radius=4):
+    """Draw a model Rect as a pygame Rect, converting from floats to pixels."""
+    rect = pygame.Rect(
+        round(body.x), round(body.y),
+        round(body.width), round(body.height)
+    )
+    pygame.draw.rect(surface, color, rect, border_radius=border_radius)
+
+
 def draw_game(screen, game, fonts, paused=False):
     """Draw a complete frame from game state. Drawing never changes the model."""
     small, normal, large = fonts
@@ -45,14 +54,20 @@ def draw_game(screen, game, fonts, paused=False):
 
     for brick in game.bricks:
         # Row colour comes from its position, so it doesn't change after removal.
-        row = max(0, min(4, int((brick.y - 90) // 28)))
-        pygame.draw.rect(screen, BRICK_COLORS[row], pygame.Rect(round(brick.x), round(brick.y), round(brick.width), round(brick.height)), border_radius=4)
-    for body, color in ((game.paddle, MINT), (game.ball, TEXT)):
-        # The model uses floats for smooth movement; only drawing rounds pixels.
-        rect = pygame.Rect(round(body.x), round(body.y), round(body.width), round(body.height))
-        pygame.draw.rect(screen, color, rect, border_radius=4)
+        # Use shared layout constants to compute row index consistently with game.py
+        row = max(0, int((brick.y - BRICK_TOP) // (BRICK_HEIGHT + BRICK_GAP_Y)))
+        # Repeat the palette if a learner adds more than five brick rows.
+        draw_body(screen, BRICK_COLORS[row % len(BRICK_COLORS)], brick)
 
-    draw_text(screen, small, "A/D or arrows: move   Space: launch   P: pause   R: restart   Esc: quit", (WIDTH // 2, HEIGHT - 17), MUTED, centered=True)
+    # Draw paddle and ball using helper (converts float to pixel coordinates)
+    draw_body(screen, MINT, game.paddle)
+    draw_body(screen, TEXT, game.ball)
+
+    draw_text(
+        screen, small,
+        "A/D or arrows: move   Space: launch   P: pause   R: restart   Esc: quit",
+        (WIDTH // 2, HEIGHT - 17), MUTED, centered=True
+    )
 
     if paused or game.state in ("ready", "won", "game_over"):
         # A translucent panel makes prompts readable without hiding the board.
@@ -112,7 +127,9 @@ def run(max_frames=None):
                 break
             keys = pygame.key.get_pressed()
             # Booleans become 0/1: opposing keys cancel rather than favouring one.
-            direction = int(keys[pygame.K_RIGHT] or keys[pygame.K_d]) - int(keys[pygame.K_LEFT] or keys[pygame.K_a])
+            right_pressed = keys[pygame.K_RIGHT] or keys[pygame.K_d]
+            left_pressed = keys[pygame.K_LEFT] or keys[pygame.K_a]
+            direction = int(right_pressed) - int(left_pressed)
             if not paused:
                 game.update(dt, direction)
             draw_game(screen, game, fonts, paused)

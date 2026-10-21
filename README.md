@@ -54,6 +54,32 @@ node --test day-01-pixel-life/tests/life.test.cjs
 
 Node is only needed for the tests. GitHub Actions also runs them automatically on pushes and pull requests.
 
+## Repository hygiene and development
+
+The root [`.gitignore`](.gitignore) applies to **both projects and all future day folders**. It excludes Python environments/bytecode, Node dependencies, build output, test reports, coverage, editor metadata, logs and local `.direnv/`, `.envrc` and `.env*` configuration. Local files remain on your machine; ignoring them does not delete them.
+
+- Keep real credentials out of source and configuration committed to Git.
+- Sanitised `.env.example` files are allowed; never put secrets in an example.
+- JavaScript lockfiles are deliberately **not ignored**. If a future day adds dependencies, commit its lockfile for reproducible installs. Day 01 has none.
+- Check `git status --short` before staging. For an ignored path, use `git check-ignore -v path/to/file` to see which rule applies.
+- `.gitignore` does not untrack an already committed file. Review `git ls-files -ci --exclude-standard` for tracked files that now match ignore rules.
+
+Both projects separate their rules from their interface: `life.js` from `app.js`, and `game.py` from `main.py`. Refactors should preserve that separation, update each day's walkthrough, and add regression tests for changed behavior.
+
+### Run all checks
+
+From the repository root, after installing Day 02's requirements in its virtual environment:
+
+```sh
+node --check day-01-pixel-life/app.js
+node --check day-01-pixel-life/life.js
+node --test day-01-pixel-life/tests/life.test.cjs
+cd day-02-breakout
+.venv/bin/python -m unittest discover -s tests -v
+```
+
+On Windows, use `.venv\\Scripts\\python.exe` for the final command. CI runs these test suites and a headless pygame smoke test on every push and pull request.
+
 ## A learning rhythm
 
 1. Run the project before studying it.

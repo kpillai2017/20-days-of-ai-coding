@@ -3,14 +3,23 @@
 (() => {
   "use strict";
 
+  // Destructuring gives local names to the functions exported by life.js.
   const { createGrid, nextGeneration, countLiving, stampPattern, patterns } = globalThis.PixelLife;
   const ROWS = 28;
   const COLS = 40;
+
+  // Cache frequently used DOM references to avoid repeated lookups
+  // Canvas and rendering context are reused whenever the board is redrawn.
   const board = document.getElementById("board");
   const context = board.getContext("2d");
+  // Control elements read/updated on user interaction and game state changes
   const playButton = document.getElementById("play");
   const speedInput = document.getElementById("speed");
   const cellStatus = document.getElementById("cell-status");
+  const generationOutput = document.getElementById("generation");
+  const populationOutput = document.getElementById("population");
+  const modeOutput = document.getElementById("mode");
+  // Pre-compute cell dimensions for rendering efficiency
   const cellWidth = board.width / COLS;
   const cellHeight = board.height / ROWS;
 
@@ -56,8 +65,8 @@
       context.lineWidth = 2;
       context.strokeRect(selectedCol * cellWidth + 1, selectedRow * cellHeight + 1, cellWidth - 2, cellHeight - 2);
     }
-    document.getElementById("generation").textContent = generation;
-    document.getElementById("population").textContent = countLiving(grid);
+    generationOutput.textContent = generation;
+    populationOutput.textContent = countLiving(grid);
   }
 
   function setPlaying(value) {
@@ -66,7 +75,7 @@
     lastTick = null;
     playButton.textContent = playing ? "Pause" : "Play";
     playButton.setAttribute("aria-pressed", String(playing));
-    document.getElementById("mode").textContent = playing ? "Running" : "Paused";
+    modeOutput.textContent = playing ? "Running" : "Paused";
   }
 
   function advance() {

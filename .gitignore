@@ -1,59 +1,57 @@
-# Dependencies
-node_modules/
-package-lock.json
-yarn.lock
+# This root file applies to every day, including nested project folders.
 
-# Build outputs
+# Local environment configuration and secrets (keep examples shareable).
+.direnv/
+.envrc
+.env
+.env.*
+!.env.example
+!.env.*.example
+
+# Python environments, bytecode and tool caches.
+.venv/
+venv/
+env/
+ENV/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.tox/
+.nox/
+*.egg-info/
+
+# JavaScript dependencies and generated output.
+# Lockfiles are NOT ignored: commit them if a future project adds dependencies.
+node_modules/
 dist/
 build/
-*.min.js
-*.min.css
 
-# IDE and editor files
+# Test reports and coverage artifacts.
+coverage/
+htmlcov/
+.nyc_output/
+.coverage
+.coverage.*
+coverage.xml
+playwright-report/
+test-results/
+
+# Local logs and temporary development files.
+*.log
+.http-server-port
+tmp_rovo_*
+
+# Editors and operating-system metadata.
 .vscode/
 .idea/
 *.swp
 *.swo
 *~
-.DS_Store
-Thumbs.db
 *.sublime-workspace
 *.sublime-project
-
-# OS-specific
 .DS_Store
 .AppleDouble
 .LSOverride
-*.swp
-*.swo
-*~
-
-# Environment files
-.env
-.env.local
-.env.*.local
-
-# Logs
-*.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-
-# Python
-.venv/
-.pytest_cache/
-__pycache__/
-*.py[cod]
-*$py.class
-*.so
-.Python
-venv/
-ENV/
-env/
-
-# Test coverage
-coverage/
-.nyc_output/
-
-# Local development server
-.http-server-port
+Thumbs.db

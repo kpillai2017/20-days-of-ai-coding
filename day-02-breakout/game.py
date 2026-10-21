@@ -12,6 +12,28 @@ from typing import List
 WIDTH = 800
 HEIGHT = 600
 
+# Gameplay constants
+BALL_SPEED = 340  # pixels per second
+PADDLE_SPEED = 460  # pixels per second
+BALL_SIZE = 12  # width and height of square ball
+INITIAL_LIVES = 3
+POINTS_PER_BRICK = 10
+MAX_FRAME_DT = 0.1  # cap frame delta to avoid jumping through bricks
+MAX_PHYSICS_STEP = 1.0 / 240.0  # largest permitted physics substep
+
+# Brick layout constants
+BRICK_ROWS = 5
+BRICK_COLS = 10
+BRICK_WIDTH = 68
+BRICK_HEIGHT = 20
+BRICK_TOP = 90
+BRICK_GAP_X = 8
+BRICK_GAP_Y = 8
+
+# Computed brick layout (horizontal centering)
+_BRICK_ROW_WIDTH = BRICK_COLS * BRICK_WIDTH + (BRICK_COLS - 1) * BRICK_GAP_X
+BRICK_START_X = (WIDTH - _BRICK_ROW_WIDTH) / 2
+
 
 @dataclass
 class Rect:
@@ -59,47 +81,28 @@ class Game:
         # Paddle: centered at bottom, above the play area
         self.paddle = Rect(x=(WIDTH - 110) / 2, y=550, width=110, height=14)
 
-        # Ball: 12x12 square
-        self.ball = Rect(x=WIDTH / 2 - 6, y=self.paddle.top - 12, width=12, height=12)
+        # Ball: square with side BALL_SIZE
+        self.ball = Rect(x=WIDTH / 2 - BALL_SIZE / 2, y=self.paddle.top - BALL_SIZE,
+                         width=BALL_SIZE, height=BALL_SIZE)
 
-        # Bricks: 5 rows x 10 columns
-        self.bricks: List[Rect] = self._create_bricks()
-
-        # Velocities in pixels/sec
-        self.vx = 0.0
-        self.vy = 0.0
-
-        # Game state
-        self.score = 0
-        self.lives = 3
-        self.state = "ready"  # "ready", "playing", "won", "game_over"
-
-        # Previous ball position for collision resolution
-        self._prev_ball_x = self.ball.x
-        self._prev_ball_y = self.ball.y
+        # Starting a new instance and pressing R share exactly the same setup.
+        # reset() also prepares the ball, velocity and collision history.
+        self.reset()
 
     def _create_bricks(self) -> List[Rect]:
         """Create initial brick layout: 5 rows x 10 columns."""
         bricks = []
-        brick_width = 68
-        brick_height = 20
-        start_x = 24
-        start_y = 90
-        spacing_x = 8
-        spacing_y = 8
-
-        for row in range(5):
-            for col in range(10):
-                x = start_x + col * (brick_width + spacing_x)
-                y = start_y + row * (brick_height + spacing_y)
-                bricks.append(Rect(x=x, y=y, width=brick_width, height=brick_height))
-
+        for row in range(BRICK_ROWS):
+            for col in range(BRICK_COLS):
+                x = BRICK_START_X + col * (BRICK_WIDTH + BRICK_GAP_X)
+                y = BRICK_TOP + row * (BRICK_HEIGHT + BRICK_GAP_Y)
+                bricks.append(Rect(x=x, y=y, width=BRICK_WIDTH, height=BRICK_HEIGHT))
         return bricks
 
     def reset(self):
         """Reset entire level: bricks, ball position, ball at rest, ready state."""
         self.score = 0
-        self.lives = 3
+        self.lives = INITIAL_LIVES
         self.paddle.x = (WIDTH - self.paddle.width) / 2
         self.bricks = self._create_bricks()
         self._prepare_serve()
@@ -116,10 +119,9 @@ class Game:
     def launch(self):
         """Launch the ball from ready state (ball moves up and right initially)."""
         if self.state == "ready":
-            # Launch at 340 px/sec target speed, initially up-right
-            speed = 340.0
-            self.vx = speed * 0.6
-            self.vy = -speed * 0.8
+            # Launch at BALL_SPEED px/sec target speed, initially up-right
+            self.vx = BALL_SPEED * 0.6
+            self.vy = -BALL_SPEED * 0.8
             self.state = "playing"
 
     def update(self, dt: float, direction: float = 0.0):
@@ -139,13 +141,13 @@ class Game:
 
         # Discard long pauses rather than simulating a huge backlog. Splitting
         # each update into tiny slices avoids jumping across thin bricks.
-        dt = min(dt, 0.1)
+        dt = min(dt, MAX_FRAME_DT)
         direction = max(-1.0, min(1.0, direction))
-        steps = math.ceil(dt / (1.0 / 240.0))
+        steps = math.ceil(dt / MAX_PHYSICS_STEP)
         substep = dt / steps
         for _ in range(steps):
             self.paddle.x = max(0, min(
-                self.paddle.x + direction * 460.0 * substep,
+                self.paddle.x + direction * PADDLE_SPEED * substep,
                 WIDTH - self.paddle.width,
             ))
             if self.state == "ready":
@@ -221,12 +223,11 @@ class Game:
         hit_offset = max(-1, min(1, hit_offset))  # Clamp
 
         # Target speed and angle
-        speed = 340.0
         angle_factor = hit_offset * 0.6  # Max 60% horizontal
-        self.vx = speed * angle_factor
+        self.vx = BALL_SPEED * angle_factor
         # Pythagoras keeps total speed constant: vx² + vy² = speed².
         # With vx limited to 60%, upward speed is always at least 80%.
-        self.vy = -math.sqrt(speed * speed - self.vx * self.vx)
+        self.vy = -math.sqrt(BALL_SPEED * BALL_SPEED - self.vx * self.vx)
 
     def _check_brick_collisions(self):
         """Check collisions with bricks and resolve with directional response."""
@@ -260,5 +261,5 @@ class Game:
 
             # Remove brick and score (only once per brick per collision)
             self.bricks.remove(brick)
-            self.score += 10
+            self.score += POINTS_PER_BRICK
             break  # Process only one brick per substep to avoid double-scoring

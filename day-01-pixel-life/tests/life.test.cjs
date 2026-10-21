@@ -233,13 +233,14 @@ test('Boundary - Edges are finite (not wrapping)', () => {
 
   const gen1 = nextGeneration(grid);
 
-  // With finite edges, the top row has no neighbors above it
-  // Cell [0,2] has only 1 neighbor (itself doesn't count)
-  // Cells [0,1] and [0,3] each have 2 neighbors
-  // None survive (need 2-3 for living cell, or exactly 3 for dead cell)
-  // After generation, verify they die or stay dead as expected with finite edges
+  // The middle cell has two neighbours and survives; the ends each have
+  // one and die. A new cell is born BELOW the middle, never above the board.
+  assert.strictEqual(gen1[0][2], 1, 'middle cell survives');
+  assert.strictEqual(gen1[0][1], 0, 'left end dies');
+  assert.strictEqual(gen1[0][3], 0, 'right end dies');
+  assert.strictEqual(gen1[1][2], 1, 'three neighbours cause a birth below');
 
-  // At minimum, verify the pattern doesn't wrap around (no cells appear at opposite edge)
+  // No cell is born on the opposite edge: this world does not wrap.
   assert.strictEqual(gen1[4][1], 0, 'opposite edge should not wrap');
   assert.strictEqual(gen1[4][2], 0, 'opposite edge should not wrap');
   assert.strictEqual(gen1[4][3], 0, 'opposite edge should not wrap');
@@ -403,6 +404,114 @@ test('Error Handling - Invalid coordinates for stampPattern', () => {
   assert.throws(() => stampPattern(grid, 1, null, patterns.BLOCK), /integer/);
   assert.throws(() => stampPattern(grid, 1, 1, null), /array/);
   assert.throws(() => stampPattern(grid, 1, 1, [[1]]), /\[row, col\]/);
+  assert.throws(() => stampPattern(grid, 1, 1, [['a', 'b']]), /integer/);
+});
+
+// ============================================================================
+// TEST SUITE: Regression Tests - Malformed Grids
+// ============================================================================
+
+test('Regression - nextGeneration rejects non-array grid', () => {
+  assert.throws(() => nextGeneration(null), /array/);
+  assert.throws(() => nextGeneration(undefined), /array/);
+  assert.throws(() => nextGeneration(42), /array/);
+  assert.throws(() => nextGeneration('grid'), /array/);
+  assert.throws(() => nextGeneration({}), /array/);
+});
+
+test('Regression - nextGeneration rejects empty grid', () => {
+  assert.throws(() => nextGeneration([]), /non-empty/);
+});
+
+test('Regression - nextGeneration rejects non-array rows', () => {
+  assert.throws(() => nextGeneration([null]), /array/);
+  assert.throws(() => nextGeneration([undefined]), /array/);
+  assert.throws(() => nextGeneration([42]), /array/);
+  assert.throws(() => nextGeneration(['row']), /array/);
+  assert.throws(() => nextGeneration([{}]), /array/);
+});
+
+test('Regression - nextGeneration rejects ragged arrays', () => {
+  assert.throws(() => nextGeneration([[0, 1], [0, 1, 0]]), /same length/);
+  assert.throws(() => nextGeneration([[0, 1, 0], [0, 1]]), /same length/);
+});
+
+test('Regression - nextGeneration rejects empty rows', () => {
+  assert.throws(() => nextGeneration([[]]), /non-empty/);
+});
+
+test('Regression - nextGeneration rejects non-numeric cells', () => {
+  assert.throws(() => nextGeneration([['a', 0]]), /numeric 0 or 1/);
+  assert.throws(() => nextGeneration([[0, null]]), /numeric 0 or 1/);
+  assert.throws(() => nextGeneration([[0, undefined]]), /numeric 0 or 1/);
+  assert.throws(() => nextGeneration([[0, 0.5]]), /numeric 0 or 1/);
+  assert.throws(() => nextGeneration([[0, 2]]), /numeric 0 or 1/);
+});
+
+test('Regression - nextGeneration rejects sparse arrays', () => {
+  const sparse = [];
+  sparse[2] = 1;
+  assert.throws(() => nextGeneration([sparse]), /numeric 0 or 1/);
+});
+
+test('Regression - countLiving rejects non-array grid', () => {
+  assert.throws(() => countLiving(null), /array/);
+  assert.throws(() => countLiving(undefined), /array/);
+  assert.throws(() => countLiving(42), /array/);
+  assert.throws(() => countLiving('grid'), /array/);
+  assert.throws(() => countLiving({}), /array/);
+});
+
+test('Regression - countLiving rejects empty grid', () => {
+  assert.throws(() => countLiving([]), /non-empty/);
+});
+
+test('Regression - countLiving rejects non-array rows', () => {
+  assert.throws(() => countLiving([null]), /array/);
+  assert.throws(() => countLiving([undefined]), /array/);
+  assert.throws(() => countLiving([42]), /array/);
+  assert.throws(() => countLiving(['row']), /array/);
+});
+
+test('Regression - countLiving rejects ragged arrays', () => {
+  assert.throws(() => countLiving([[0, 1], [0, 1, 0]]), /same length/);
+});
+
+test('Regression - countLiving rejects empty rows', () => {
+  assert.throws(() => countLiving([[]]), /non-empty/);
+});
+
+test('Regression - countLiving rejects non-numeric cells', () => {
+  assert.throws(() => countLiving([['a', 0]]), /numeric 0 or 1/);
+  assert.throws(() => countLiving([[0, null]]), /numeric 0 or 1/);
+  assert.throws(() => countLiving([[0, 2]]), /numeric 0 or 1/);
+});
+
+test('Regression - countLiving rejects sparse arrays', () => {
+  const sparse = [];
+  sparse[2] = 1;
+  assert.throws(() => countLiving([sparse]), /numeric 0 or 1/);
+});
+
+test('Regression - stampPattern rejects malformed pattern coordinates', () => {
+  const grid = createGrid(5, 5);
+  assert.throws(() => stampPattern(grid, 1, 1, [[0]]), /\[row, col\]/);
+  assert.throws(() => stampPattern(grid, 1, 1, [[0, 1, 2]]), /\[row, col\]/);
+  assert.throws(() => stampPattern(grid, 1, 1, [['a', 0]]), /integer/);
+  assert.throws(() => stampPattern(grid, 1, 1, [[0, 'b']]), /integer/);
+  assert.throws(() => stampPattern(grid, 1, 1, [[0.5, 0]]), /integer/);
+  assert.throws(() => stampPattern(grid, 1, 1, [[0, 1.5]]), /integer/);
+});
+
+test('Regression - stampPattern rejects invalid grid', () => {
+  assert.throws(() => stampPattern([], 1, 1, patterns.BLOCK), /non-empty/);
+  assert.throws(() => stampPattern(null, 1, 1, patterns.BLOCK), /array/);
+  assert.throws(() => stampPattern([[]], 1, 1, patterns.BLOCK), /non-empty/);
+});
+
+test('Regression - stampPattern rejects malformed grid cells', () => {
+  const badGrid = [['a', 0], [0, 1]];
+  assert.throws(() => stampPattern(badGrid, 1, 1, patterns.BLOCK), /numeric 0 or 1/);
 });
 
 // ============================================================================

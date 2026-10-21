@@ -98,6 +98,15 @@ The script exports `PixelLife` on `globalThis` for browsers and through `module.
 | `stampPattern(grid, startRow, startCol, coordinates)` | Return a copy of the grid with a pattern added at a top-left offset; existing cells remain, and off-board cells are clipped. |
 | `countNeighbors(grid, row, col)` | Internal helper that counts up to eight neighbours, checking bounds. Not part of the public API. |
 
+**Grid validation:** A private `validateGrid(grid)` function enforces consistent validation across `nextGeneration`, `countLiving` and `stampPattern`. It rejects:
+- Non-array grids or empty grids
+- Non-array rows or empty rows
+- Ragged arrays (rows with inconsistent lengths)
+- Non-numeric or non-0/1 cell values (e.g. `null`, `0.5`, `2`)
+- Sparse arrays with holes
+
+**Pattern stamping:** The `stampPattern` function places a pattern at a given top-left offset. The parameter names `startRow` and `startCol` describe an origin point, not a centre; `app.js` calculates the centred offset. Pattern coordinates are validated before processing: each coordinate must be an integer pair `[row, col]`. Coordinates outside grid bounds are silently clipped.
+
 `PixelLife.patterns` provides `BLOCK`, `BLINKER`, `GLIDER` and `TOAD`. Each pattern is an array of relative `[row, col]` pairs. For example:
 
 ```js
@@ -153,7 +162,7 @@ Or from the repository root:
 node --test day-01-pixel-life/tests/life.test.cjs
 ```
 
-Tests cover independent rows, population counts, finite boundaries, clipping, input immutability, simultaneous updates and classic patterns. GitHub Actions runs the same suite on pushes and pull requests.
+Tests cover independent rows, population counts, finite boundaries, clipping, input immutability, simultaneous updates and classic patterns. Regression tests ensure all three public functions (`nextGeneration`, `countLiving`, `stampPattern`) consistently reject malformed grids (non-arrays, empty grids, ragged arrays, non-array rows, non-numeric/sparse cells) and invalid pattern coordinates. GitHub Actions runs the same suite on pushes and pull requests.
 
 ### Check the interface yourself
 
