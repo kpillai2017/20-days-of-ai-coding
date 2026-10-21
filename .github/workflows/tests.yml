@@ -1,0 +1,21 @@
+# Run the same dependency-free checks locally and on GitHub.
+name: Day 01 checks
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  pixel-life:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Check JavaScript syntax
+        run: |
+          node --check day-01-pixel-life/life.js
+          node --check day-01-pixel-life/app.js
+      - name: Test simulation rules
+        run: node --test day-01-pixel-life/tests/life.test.cjs

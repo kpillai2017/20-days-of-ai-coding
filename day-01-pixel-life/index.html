@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <!-- This makes the layout fit a phone instead of pretending it is a desktop. -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>Pixel Life · Day 01</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- defer waits for the HTML to exist; scripts execute in this order. -->
+  <script src="life.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <main>
+    <header>
+      <p class="eyebrow">20 days of AI coding / day 01</p>
+      <h1>Pixel<span>Life</span><span class="title-dot" aria-hidden="true">.</span></h1>
+      <p class="intro">Tiny rules. Unexpected worlds. Draw a few cells and watch them come alive.</p>
+    </header>
+
+    <section class="simulation" aria-label="Interactive Game of Life">
+      <div class="toolbar">
+        <div class="buttons">
+          <button id="play" class="primary" type="button" aria-pressed="false">Play</button>
+          <button id="step" type="button">Step</button>
+          <button id="random" type="button">Random</button>
+          <button id="clear" type="button">Clear</button>
+        </div>
+        <div class="counters" aria-label="Simulation statistics">
+          <span>Generation <strong id="generation">0</strong></span>
+          <span>Alive <strong id="population">0</strong></span>
+        </div>
+      </div>
+
+      <!-- Canvas pixels are not HTML cells. The fallback and keyboard instructions
+           explain the interaction; a visible focus cell supports keyboard editing. -->
+      <canvas id="board" width="800" height="560" tabindex="0"
+        aria-label="Game of Life board, 28 rows and 40 columns"
+        aria-describedby="board-help cell-status">
+        This simulation needs a browser with HTML canvas support.
+      </canvas>
+      <div class="board-footer">
+        <p id="board-help">Draw to edit · Arrow keys to move · Space or Enter to toggle</p>
+        <span id="mode">Paused</span>
+      </div>
+      <p id="cell-status" class="sr-only" role="status" aria-live="polite"></p>
+
+      <div class="settings">
+        <label for="pattern">Start with a pattern
+          <select id="pattern">
+            <option value="GLIDER">Glider</option>
+            <option value="BLINKER">Blinker</option>
+            <option value="BLOCK">Block</option>
+            <option value="TOAD">Toad</option>
+          </select>
+        </label>
+        <button id="load-pattern" type="button">Load pattern</button>
+        <label for="speed" class="speed-label">Speed <output id="speed-value" for="speed">8 generations / sec</output>
+          <input id="speed" type="range" min="1" max="20" value="8">
+        </label>
+      </div>
+    </section>
+
+    <section class="learn" aria-labelledby="rules-title">
+      <div>
+        <p class="eyebrow">A world with four rules</p>
+        <h2 id="rules-title">No player. Just possibility.</h2>
+        <p>Every cell checks its eight neighbours. All cells change together, once per generation.</p>
+        <p class="boundary-note">A finite world: cells beyond the board are always dead. Patterns do not wrap around.</p>
+      </div>
+      <ol class="rules">
+        <li><strong>Too lonely</strong><span>Fewer than 2 neighbours? A living cell dies.</span></li>
+        <li><strong>Just right</strong><span>2 or 3 neighbours? A living cell survives.</span></li>
+        <li><strong>Too crowded</strong><span>More than 3 neighbours? A living cell dies.</span></li>
+        <li><strong>A new beginning</strong><span>Exactly 3 neighbours? A dead cell comes alive.</span></li>
+      </ol>
+    </section>
+    <footer>Built to learn. Inspired by John Conway’s Game of Life. <a href="README.md">Read the code walkthrough ↗</a></footer>
+    <noscript><p>Enable JavaScript to draw cells and run the simulation.</p></noscript>
+  </main>
+</body>
+</html>
