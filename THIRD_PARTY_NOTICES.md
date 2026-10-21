@@ -1,0 +1,25 @@
+# Third-party notices and project provenance
+
+## Scope of the repository licence
+
+The [MIT licence](LICENSE) applies to this repository's own code and documentation. It does **not** relicense third-party software, fonts, brands, or linked reference material. Dependencies retain their upstream licences.
+
+These projects were created with AI coding assistance and subsequently reviewed and tested. They are small educational implementations of established ideas, not official versions of the games they reference. AI assistance and passing tests are not guarantees of correctness or legal clearance.
+
+## Day 01: Pixel Life
+
+- Implements the rules of **Conway's Game of Life**, devised by **John Horton Conway**. The [Day 01 guide](day-01-pixel-life/README.md#references-and-attribution) links to background, pattern descriptions and browser documentation.
+- Uses browser APIs and no third-party runtime JavaScript libraries.
+- Does not bundle third-party artwork, fonts, audio or tutorial source code. References are links for further reading, not content relicensed by this repository.
+
+## Day 02: Breakout
+
+- An educational paddle-and-bricks game inspired by the classic **Breakout**, originally released by Atari. It is not affiliated with or endorsed by Atari; no original game source, artwork or sound is included.
+- Depends on **pygame 2.6.1**, installed separately using `requirements.txt`. pygame identifies its licence as **LGPL**; see [pygame 2.6.1's LGPL 2.1 licence text](https://github.com/pygame/pygame/blob/2.6.1/docs/LGPL.txt) and [upstream repository](https://github.com/pygame/pygame).
+- pygame wheels can include native libraries and assets with their own notices, including the default font used by `pygame.font.Font(None, size)`. That font comes from the installed pygame package, not this Git repository; it is not covered by our MIT licence.
+- This repository does not vendor or redistribute pygame, its font file, or its native libraries. If you package or redistribute the application together with those dependencies, review and preserve their upstream notices and comply with their licences; the repository's MIT licence alone is not sufficient for that bundle.
+- [The Day 02 guide](day-02-breakout/README.md#8-references-and-attribution) lists learning references. Linked articles and documentation remain the property of their respective authors.
+
+## Development tools
+
+Python, Node.js, GitHub Actions and their actions are external tools/services used for development and testing. Their implementations are not included in this repository; they retain their own terms and licences. See [the workflow](.github/workflows/tests.yml) for action versions.

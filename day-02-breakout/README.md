@@ -238,4 +238,10 @@ This is an original educational implementation inspired by the classic Breakout 
 - [MDN: 2D collision detection](https://developer.mozilla.org/en-US/docs/Games/Techniques/2D_collision_detection)
 - [Fix Your Timestep! — further reading on simulation timing](https://gafferongames.com/post/fix_your_timestep/)
 
-pygame is distributed under LGPL; see [its licence information](https://www.pygame.org/docs/LGPL.html). The repository has not selected a licence for its own code.
+## 9. Licence and dependencies
+
+This project's own code and documentation are covered by the repository's [MIT licence](../LICENSE).
+
+pygame is distributed under LGPL; see [its versioned LGPL 2.1 licence text](https://github.com/pygame/pygame/blob/2.6.1/docs/LGPL.txt). Its default font and other bundled components retain their upstream licences; they are installed with pygame, not stored in this repository. Our MIT licence does not relicense those dependencies. If distributing a packaged executable, review the licences and notices of everything included in that package. See [Third-party notices and project provenance](../THIRD_PARTY_NOTICES.md).
+
+Breakout was originally released by Atari. This educational implementation is not affiliated with or endorsed by Atari.

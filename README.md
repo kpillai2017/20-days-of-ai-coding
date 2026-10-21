@@ -88,4 +88,10 @@ On Windows, use `.venv\\Scripts\\python.exe` for the final command. CI runs thes
 4. Run the tests and add a test for a new behaviour.
 5. Write down what you learned before starting the next day.
 
-No software licence has been selected yet; this repository does not currently grant an open-source licence.
+## Licence and attribution
+
+This repository's own code and documentation are available under the **[MIT licence](LICENSE)**, copyright © 2026 kpillai2017. You may reuse, modify and redistribute them subject to the licence, including retaining its notice. The software is provided without warranty.
+
+Third-party dependencies and reference material retain their own licences. In particular, Day 02 uses pygame, which is LGPL-licensed; our MIT licence does not replace its terms. Read [Third-party notices and project provenance](THIRD_PARTY_NOTICES.md) and each day's reference section for details.
+
+The projects were built with AI coding assistance, then reviewed and tested. They are educational implementations and are not affiliated with the creators or publishers of the original games.

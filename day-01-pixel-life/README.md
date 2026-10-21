@@ -210,3 +210,7 @@ These are references for learning; this project is an original small implementat
 - [Node.js: test runner](https://nodejs.org/api/test.html)
 
 Game of Life was devised by John Horton Conway. No third-party images, fonts or sounds are bundled.
+
+## Licence
+
+This project's own code and documentation are covered by the repository's [MIT licence](../LICENSE). The linked references retain their respective authors' rights and licences. See [Third-party notices and project provenance](../THIRD_PARTY_NOTICES.md).
