@@ -1,5 +1,5 @@
-# Run the same dependency-free checks locally and on GitHub.
-name: Day 01 checks
+# Keep every completed day's checks passing as the series grows.
+name: Project checks
 on:
   push:
   pull_request:
@@ -19,3 +19,25 @@ jobs:
           node --check day-01-pixel-life/app.js
       - name: Test simulation rules
         run: node --test day-01-pixel-life/tests/life.test.cjs
+  breakout:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ['3.9', '3.12', '3.13']
+    defaults:
+      run:
+        working-directory: day-02-breakout
+    env:
+      SDL_VIDEODRIVER: dummy
+      PYGAME_HIDE_SUPPORT_PROMPT: '1'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install pygame
+        run: python -m pip install -r requirements.txt
+      - name: Test rules and headless window controls
+        run: python -m unittest discover -s tests -v
+      - name: Smoke-test the real game loop
+        run: python main.py --frames 5

@@ -11,8 +11,23 @@ Each day should include runnable code, explanatory comments, installation and us
 | Day | Project | Stack | Learn |
 | --- | --- | --- | --- |
 | 01 | [Pixel Life](day-01-pixel-life/) | HTML / CSS / JavaScript | Conway’s Game of Life, arrays, canvas, events and simulation loops |
+| 02 | [Breakout](day-02-breakout/) | Python / pygame | Game loops, delta time, collision detection and game state |
 
-**Days 02–20:** not built yet. Each will be a separate small project in this repository.
+**Days 03–20:** not built yet. Each will be a separate small project in this repository.
+
+## Run Day 02
+
+See [the Breakout guide](day-02-breakout/README.md) for Windows and macOS/Linux setup. With Python 3.9–3.13, from the repository root on macOS/Linux:
+
+```sh
+cd day-02-breakout
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install -r requirements.txt
+python main.py
+```
+
+Move with arrows or A/D; Space launches; P pauses; R restarts. Run all Day 02 tests from that folder with `python -m unittest discover -s tests -v`.
 
 ## Run Day 01
 

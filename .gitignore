@@ -40,6 +40,8 @@ yarn-debug.log*
 yarn-error.log*
 
 # Python
+.venv/
+.pytest_cache/
 __pycache__/
 *.py[cod]
 *$py.class

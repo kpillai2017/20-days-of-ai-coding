@@ -1,0 +1,2 @@
+# The standard library handles game logic and tests; pygame supplies the window.
+pygame==2.6.1
