@@ -27,6 +27,12 @@ These projects were created with AI coding assistance and subsequently reviewed 
 - The [Day 03 guide](day-03-pocket-tasks/README.md#references-and-licence) links to documentation for forms, safe DOM rendering, browser storage and tests. Linked material retains its authors' rights.
 - Its own source and documentation are covered by the repository's MIT licence.
 
+## Day 04: Maze Explorer
+
+- Original educational maze generation and navigation code, using standard depth-first and breadth-first search algorithms; references appear in [the guide](day-04-maze-explorer/README.md#references-and-licence).
+- Uses **pygame 2.6.1**, installed separately. The same LGPL and bundled-font/native-library considerations described under Day 02 apply; no pygame code or font files are vendored here.
+- No third-party game artwork, audio, tutorial source or runtime AI service is bundled. Own source and documentation are covered by the repository's MIT licence; linked references retain their authors' rights.
+
 ## Development tools
 
 Python, Node.js, GitHub Actions and their actions are external tools/services used for development and testing. Their implementations are not included in this repository; they retain their own terms and licences. See [the workflow](.github/workflows/tests.yml) for action versions.

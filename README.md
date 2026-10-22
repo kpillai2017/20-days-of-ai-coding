@@ -13,8 +13,23 @@ Each day should include runnable code, explanatory comments, installation and us
 | 01 | [Pixel Life](day-01-pixel-life/) | HTML / CSS / JavaScript | Conway’s Game of Life, arrays, canvas, events and simulation loops |
 | 02 | [Breakout](day-02-breakout/) | Python / pygame | Game loops, delta time, collision detection and game state |
 | 03 | [Pocket Tasks](day-03-pocket-tasks/) | HTML / CSS / JavaScript | Forms, immutable state, safe DOM rendering and browser persistence |
+| 04 | [Maze Explorer](day-04-maze-explorer/) | Python / pygame | DFS generation, backtracking, BFS pathfinding and graph invariants |
 
-**Days 04–20:** not built yet. Each will be a separate small project in this repository.
+**Days 05–20:** not built yet. Each will be a separate small project in this repository.
+
+## Run Day 04
+
+With Python 3.9–3.13, from the repository root on macOS/Linux:
+
+```sh
+cd day-04-maze-explorer
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install -r requirements.txt
+python main.py --seed 42
+```
+
+Arrows/WASD move, H reveals a route, R restarts the same maze, and N generates a fresh one. See [the Maze Explorer guide](day-04-maze-explorer/README.md) for Windows setup and [the learning tour](day-04-maze-explorer/LEARNING_GUIDE.md) for hand-worked DFS/BFS examples. Test from its folder with `python -m unittest discover -s tests -v`.
 
 ## Run Day 03
 
@@ -78,11 +93,11 @@ The root [`.gitignore`](.gitignore) applies to **all projects and future day fol
 - Check `git status --short` before staging. For an ignored path, use `git check-ignore -v path/to/file` to see which rule applies.
 - `.gitignore` does not untrack an already committed file. Review `git ls-files -ci --exclude-standard` for tracked files that now match ignore rules.
 
-All three projects separate their rules from their interface: `life.js` from `app.js`, `game.py` from `main.py`, and `tasks.js` from `app.js`. Refactors should preserve that separation, update each day's walkthrough, and add regression tests for changed behavior.
+All four projects separate rules from the interface: `life.js`/`app.js`, `game.py`/`main.py`, `tasks.js`/`app.js`, and `maze.py`/`main.py`. Refactors should preserve that separation, update each day's walkthrough, and add regression tests for changed behavior.
 
 ### Run all checks
 
-From the repository root, after installing Day 02's requirements in its virtual environment:
+From the repository root, after installing each Python day's requirements in its own virtual environment:
 
 ```sh
 node --check day-01-pixel-life/app.js
@@ -92,6 +107,8 @@ node --check day-03-pocket-tasks/tasks.js
 node --check day-03-pocket-tasks/app.js
 node --test day-03-pocket-tasks/tests/tasks.test.cjs
 cd day-02-breakout
+.venv/bin/python -m unittest discover -s tests -v
+cd ../day-04-maze-explorer
 .venv/bin/python -m unittest discover -s tests -v
 ```
 

@@ -1,0 +1,2 @@
+# Only the window needs pygame; maze generation and model tests use Python alone.
+pygame==2.6.1
