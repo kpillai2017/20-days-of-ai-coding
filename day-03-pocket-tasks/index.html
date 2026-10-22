@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
+  <!-- Use the device width so responsive CSS works on phones. -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light">
   <title>Pocket Tasks · Day 03</title>
@@ -19,8 +20,11 @@
     </header>
     <section class="notebook" aria-labelledby="list-title">
       <div class="heading"><h2 id="list-title">Your list</h2><span id="save-state">Checking storage…</span></div>
+      <!-- hidden starts this alert out of sight. JS reveals it only on failure. -->
       <p id="storage-warning" class="warning" role="alert" hidden></p>
       <button id="reset-storage" class="danger" type="button" hidden>Discard invalid saved list</button>
+      <!-- A real form supports Enter-to-submit. The label's for matches the
+           input id; placeholder text is a hint, not a substitute for a label. -->
       <form id="task-form">
         <label for="task-input">What would you like to do?</label>
         <div class="input-row">
@@ -31,6 +35,8 @@
         <p id="form-error" class="error" role="alert" hidden></p>
       </form>
       <div class="list-toolbar">
+        <!-- Pressed buttons express the selected filter; these are not tabs
+             because they filter one list rather than switch tab panels. -->
         <div class="filters" role="group" aria-label="Filter tasks">
           <button type="button" data-filter="all" aria-pressed="true">All</button>
           <button type="button" data-filter="active" aria-pressed="false">Active</button>
@@ -42,6 +48,7 @@
       <ul id="task-list" aria-label="Tasks"></ul>
       <p id="empty-state" class="empty">Your list is clear. Add your first small step above.</p>
       <div class="list-footer"><span id="total">0 tasks total</span><button id="clear-completed" type="button" disabled>Clear completed</button></div>
+      <!-- Polite live regions announce an action without moving keyboard focus. -->
       <p id="announcement" class="sr-only" role="status" aria-live="polite"></p>
     </section>
     <aside class="storage-note">
@@ -50,6 +57,7 @@
       <p>Use one tab at a time: simultaneous edits in different tabs can overwrite each other.</p>
     </aside>
     <footer>Small steps count. <a href="README.md">Read the beginner walkthrough ↗</a></footer>
+    <!-- This fallback is displayed only when JavaScript is disabled. -->
     <noscript><p class="warning">Enable JavaScript to add and save tasks.</p></noscript>
   </main>
 </body>

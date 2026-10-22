@@ -4,6 +4,8 @@ A tiny to-do list in **HTML, CSS and JavaScript**. Add tasks, tick them off, fil
 
 No accounts, backend, AI API, runtime dependencies or build tools. AI assisted with coding; the app itself doesn't use AI.
 
+**New to coding? Start with [the guided learning tour](LEARNING_GUIDE.md)**: a 30-minute reading route, a worked trace of one task through the app, a syntax glossary, debugger instructions and small exercises with expected outcomes. This README remains the setup and behavior reference.
+
 ## 1. Run it
 
 Download and extract the repository or update your clone with `git pull`. From the repository root:
@@ -59,7 +61,8 @@ day-03-pocket-tasks/
 ├── app.js              # Events, safe rendering, focus and persistence
 ├── tests/
 │   └── tasks.test.cjs  # Node's built-in test runner; no install needed
-└── README.md
+├── README.md           # Setup, behavior, API reference and troubleshooting
+└── LEARNING_GUIDE.md   # Guided reading, glossary, debugger and exercises
 ```
 
 ### The model: `tasks.js`

@@ -4,11 +4,18 @@
  * Covers immutability, constraints, duplicates, edge cases, and serialization
  */
 
+// Node is a JavaScript runtime outside the browser. require() imports a module.
+// Both tools below ship with Node: there is no npm package to install.
 const test = require('node:test');
 const assert = require('node:assert/strict');
 const PocketTasks = require('../tasks.js');
 
-// Destructure API
+// A test normally has three stages: Arrange (prepare input), Act (call the
+// function), Assert (check the result). A failed assertion makes Node report
+// a failure. Passing tests are examples and regression protection, not proof
+// that every possible input or browser interaction is correct.
+//
+// Destructuring pulls named properties out of the exported model object.
 const {
   MAX_TEXT_LENGTH,
   MAX_TASKS,
@@ -35,6 +42,9 @@ test('API constants are correct', () => {
 // addTask - Basic Functionality
 // ============================================================================
 
+// Representative Arrange–Act–Assert example:
+// [] is our arranged starting list; addTask is the action; assertions below
+// compare the returned array/object to the expected result.
 test('addTask creates new task with correct structure', () => {
   const tasks = [];
   const result = addTask(tasks, 'Buy milk', 'task-1');
@@ -46,6 +56,9 @@ test('addTask creates new task with correct structure', () => {
   assert.equal(result.task.completed, false, 'New task should be incomplete');
 });
 
+// Equal contents do not imply identical objects. notStrictEqual checks that
+// the result is a different array reference; checking original.length also
+// proves that adding did not append into the caller's original array.
 test('addTask returns new array (immutability)', () => {
   const original = [];
   const result = addTask(original, 'Task 1', 'id-1');
@@ -696,6 +709,9 @@ test('Unicode handling in text', () => {
 });
 
 // Shared validation must protect every operation, not only loading JSON.
+// A sparse array has an empty slot, not a valid task. Test every public
+// operation against the same invalid inputs so validation stays consistent.
+// assert.throws expects an exception; unexpected success would fail the test.
 test('all operations reject malformed and sparse task arrays', () => {
   const operations = [
     value => addTask(value, 'new', 'new-id'),

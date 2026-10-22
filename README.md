@@ -25,7 +25,7 @@ cd day-03-pocket-tasks
 python3 -m http.server 8000 --bind 127.0.0.1
 ```
 
-Open **http://localhost:8000** (Windows: use `py` instead of `python3`). Use the same browser, host and port to keep accessing the same saved tasks. No runtime dependencies or accounts. Browser storage isn't a backup or cloud sync; clearing site data can remove tasks. See [the Pocket Tasks guide](day-03-pocket-tasks/README.md) for storage warnings, recovery, controls and the code walkthrough.
+Open **http://localhost:8000** (Windows: use `py` instead of `python3`). Use the same browser, host and port to keep accessing the same saved tasks. No runtime dependencies or accounts. Browser storage isn't a backup or cloud sync; clearing site data can remove tasks. See [the Pocket Tasks guide](day-03-pocket-tasks/README.md) for storage warnings, recovery, controls and the code walkthrough. For a slower introduction, follow [the beginner learning tour](day-03-pocket-tasks/LEARNING_GUIDE.md), including a glossary, debugging exercise and an end-to-end data trace.
 
 Test from the repository root with `node --test day-03-pocket-tasks/tests/tasks.test.cjs` (Node.js 20+).
 
