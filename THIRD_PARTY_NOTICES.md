@@ -20,6 +20,13 @@ These projects were created with AI coding assistance and subsequently reviewed 
 - This repository does not vendor or redistribute pygame, its font file, or its native libraries. If you package or redistribute the application together with those dependencies, review and preserve their upstream notices and comply with their licences; the repository's MIT licence alone is not sufficient for that bundle.
 - [The Day 02 guide](day-02-breakout/README.md#8-references-and-attribution) lists learning references. Linked articles and documentation remain the property of their respective authors.
 
+## Day 03: Pocket Tasks
+
+- An original educational task tracker using browser APIs only; no third-party runtime libraries, fonts, images, audio or analytics are bundled.
+- Uses `localStorage` for same-browser persistence; task data is not sent to GitHub or a backend.
+- The [Day 03 guide](day-03-pocket-tasks/README.md#references-and-licence) links to documentation for forms, safe DOM rendering, browser storage and tests. Linked material retains its authors' rights.
+- Its own source and documentation are covered by the repository's MIT licence.
+
 ## Development tools
 
 Python, Node.js, GitHub Actions and their actions are external tools/services used for development and testing. Their implementations are not included in this repository; they retain their own terms and licences. See [the workflow](.github/workflows/tests.yml) for action versions.

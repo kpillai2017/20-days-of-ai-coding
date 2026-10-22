@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>Pocket Tasks · Day 03</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- Classic deferred scripts work without a bundler. Order matters. -->
+  <script src="tasks.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <main>
+    <header>
+      <p class="eyebrow">20 days of AI coding / day 03</p>
+      <h1>Pocket Tasks<span aria-hidden="true">.</span></h1>
+      <p class="intro">A little space for your next small steps.</p>
+    </header>
+    <section class="notebook" aria-labelledby="list-title">
+      <div class="heading"><h2 id="list-title">Your list</h2><span id="save-state">Checking storage…</span></div>
+      <p id="storage-warning" class="warning" role="alert" hidden></p>
+      <button id="reset-storage" class="danger" type="button" hidden>Discard invalid saved list</button>
+      <form id="task-form">
+        <label for="task-input">What would you like to do?</label>
+        <div class="input-row">
+          <input id="task-input" name="task" type="text" maxlength="200" autocomplete="off" placeholder="e.g. Take a walk after lunch" aria-describedby="input-help form-error" required>
+          <button class="primary" type="submit">Add task</button>
+        </div>
+        <p id="input-help" class="hint">Up to 200 characters · Enter to add · 500 tasks maximum</p>
+        <p id="form-error" class="error" role="alert" hidden></p>
+      </form>
+      <div class="list-toolbar">
+        <div class="filters" role="group" aria-label="Filter tasks">
+          <button type="button" data-filter="all" aria-pressed="true">All</button>
+          <button type="button" data-filter="active" aria-pressed="false">Active</button>
+          <button type="button" data-filter="completed" aria-pressed="false">Completed</button>
+        </div>
+        <span id="remaining">0 tasks left</span>
+      </div>
+      <!-- Real list items and native checkboxes provide keyboard semantics. -->
+      <ul id="task-list" aria-label="Tasks"></ul>
+      <p id="empty-state" class="empty">Your list is clear. Add your first small step above.</p>
+      <div class="list-footer"><span id="total">0 tasks total</span><button id="clear-completed" type="button" disabled>Clear completed</button></div>
+      <p id="announcement" class="sr-only" role="status" aria-live="polite"></p>
+    </section>
+    <aside class="storage-note">
+      <strong>Yours, on this browser.</strong>
+      <p>No account. No cloud sync. Tasks are stored on this browser for this address. Clearing site data or using private browsing can remove them. Don’t use this for passwords or sensitive information.</p>
+      <p>Use one tab at a time: simultaneous edits in different tabs can overwrite each other.</p>
+    </aside>
+    <footer>Small steps count. <a href="README.md">Read the beginner walkthrough ↗</a></footer>
+    <noscript><p class="warning">Enable JavaScript to add and save tasks.</p></noscript>
+  </main>
+</body>
+</html>

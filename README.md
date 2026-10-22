@@ -12,8 +12,22 @@ Each day should include runnable code, explanatory comments, installation and us
 | --- | --- | --- | --- |
 | 01 | [Pixel Life](day-01-pixel-life/) | HTML / CSS / JavaScript | Conway’s Game of Life, arrays, canvas, events and simulation loops |
 | 02 | [Breakout](day-02-breakout/) | Python / pygame | Game loops, delta time, collision detection and game state |
+| 03 | [Pocket Tasks](day-03-pocket-tasks/) | HTML / CSS / JavaScript | Forms, immutable state, safe DOM rendering and browser persistence |
 
-**Days 03–20:** not built yet. Each will be a separate small project in this repository.
+**Days 04–20:** not built yet. Each will be a separate small project in this repository.
+
+## Run Day 03
+
+From the repository root:
+
+```sh
+cd day-03-pocket-tasks
+python3 -m http.server 8000 --bind 127.0.0.1
+```
+
+Open **http://localhost:8000** (Windows: use `py` instead of `python3`). Use the same browser, host and port to keep accessing the same saved tasks. No runtime dependencies or accounts. Browser storage isn't a backup or cloud sync; clearing site data can remove tasks. See [the Pocket Tasks guide](day-03-pocket-tasks/README.md) for storage warnings, recovery, controls and the code walkthrough.
+
+Test from the repository root with `node --test day-03-pocket-tasks/tests/tasks.test.cjs` (Node.js 20+).
 
 ## Run Day 02
 
@@ -56,7 +70,7 @@ Node is only needed for the tests. GitHub Actions also runs them automatically o
 
 ## Repository hygiene and development
 
-The root [`.gitignore`](.gitignore) applies to **both projects and all future day folders**. It excludes Python environments/bytecode, Node dependencies, build output, test reports, coverage, editor metadata, logs and local `.direnv/`, `.envrc` and `.env*` configuration. Local files remain on your machine; ignoring them does not delete them.
+The root [`.gitignore`](.gitignore) applies to **all projects and future day folders**. It excludes Python environments/bytecode, Node dependencies, build output, test reports, coverage, editor metadata, logs and local `.direnv/`, `.envrc` and `.env*` configuration. Local files remain on your machine; ignoring them does not delete them.
 
 - Keep real credentials out of source and configuration committed to Git.
 - Sanitised `.env.example` files are allowed; never put secrets in an example.
@@ -64,7 +78,7 @@ The root [`.gitignore`](.gitignore) applies to **both projects and all future da
 - Check `git status --short` before staging. For an ignored path, use `git check-ignore -v path/to/file` to see which rule applies.
 - `.gitignore` does not untrack an already committed file. Review `git ls-files -ci --exclude-standard` for tracked files that now match ignore rules.
 
-Both projects separate their rules from their interface: `life.js` from `app.js`, and `game.py` from `main.py`. Refactors should preserve that separation, update each day's walkthrough, and add regression tests for changed behavior.
+All three projects separate their rules from their interface: `life.js` from `app.js`, `game.py` from `main.py`, and `tasks.js` from `app.js`. Refactors should preserve that separation, update each day's walkthrough, and add regression tests for changed behavior.
 
 ### Run all checks
 
@@ -74,6 +88,9 @@ From the repository root, after installing Day 02's requirements in its virtual 
 node --check day-01-pixel-life/app.js
 node --check day-01-pixel-life/life.js
 node --test day-01-pixel-life/tests/life.test.cjs
+node --check day-03-pocket-tasks/tasks.js
+node --check day-03-pocket-tasks/app.js
+node --test day-03-pocket-tasks/tests/tasks.test.cjs
 cd day-02-breakout
 .venv/bin/python -m unittest discover -s tests -v
 ```

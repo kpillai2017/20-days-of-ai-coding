@@ -21,6 +21,19 @@ jobs:
           node --check day-01-pixel-life/app.js
       - name: Test simulation rules
         run: node --test day-01-pixel-life/tests/life.test.cjs
+  pocket-tasks:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: '22'
+      - name: Check JavaScript syntax
+        run: |
+          node --check day-03-pocket-tasks/tasks.js
+          node --check day-03-pocket-tasks/app.js
+      - name: Test task operations and saved-data validation
+        run: node --test day-03-pocket-tasks/tests/tasks.test.cjs
   breakout:
     runs-on: ubuntu-24.04
     strategy:
