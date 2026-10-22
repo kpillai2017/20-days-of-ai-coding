@@ -14,8 +14,15 @@ Each day should include runnable code, explanatory comments, installation and us
 | 02 | [Breakout](day-02-breakout/) | Python / pygame | Game loops, delta time, collision detection and game state |
 | 03 | [Pocket Tasks](day-03-pocket-tasks/) | HTML / CSS / JavaScript | Forms, immutable state, safe DOM rendering and browser persistence |
 | 04 | [Maze Explorer](day-04-maze-explorer/) | Python / pygame | DFS generation, backtracking, BFS pathfinding and graph invariants |
+| 05 | [Typing Sprint](day-05-typing-sprint/) | HTML / CSS / JavaScript | Text input, elapsed-time deadlines, state machines and scoring |
 
-**Days 05–20:** not built yet. Each will be a separate small project in this repository.
+**Days 06–20:** not built yet. Each will be a separate small project in this repository.
+
+## Run Day 05
+
+Open `day-05-typing-sprint/index.html` directly, or serve it from that folder with `python3 -m http.server 8000 --bind 127.0.0.1` and visit **http://localhost:8000** (Windows: use `py`). Type to start a 60-second attempt; correct mistakes with normal editing keys and restart for another try. No accounts or saved results.
+
+Read [the setup/scoring guide](day-05-typing-sprint/README.md) and [the beginner learning tour](day-05-typing-sprint/LEARNING_GUIDE.md). WPM and accuracy use current matching characters; pasting is allowed, so this is practice rather than a verified benchmark. Test from the repository root with `node --test day-05-typing-sprint/tests/sprint.test.cjs`.
 
 ## Run Day 04
 
@@ -93,7 +100,7 @@ The root [`.gitignore`](.gitignore) applies to **all projects and future day fol
 - Check `git status --short` before staging. For an ignored path, use `git check-ignore -v path/to/file` to see which rule applies.
 - `.gitignore` does not untrack an already committed file. Review `git ls-files -ci --exclude-standard` for tracked files that now match ignore rules.
 
-All four projects separate rules from the interface: `life.js`/`app.js`, `game.py`/`main.py`, `tasks.js`/`app.js`, and `maze.py`/`main.py`. Refactors should preserve that separation, update each day's walkthrough, and add regression tests for changed behavior.
+All five projects separate rules from the interface: `life.js`/`app.js`, `game.py`/`main.py`, `tasks.js`/`app.js`, `maze.py`/`main.py`, and `sprint.js`/`app.js`. Refactors should preserve that separation, update each day's walkthrough, and add regression tests for changed behavior.
 
 ### Run all checks
 
@@ -106,6 +113,9 @@ node --test day-01-pixel-life/tests/life.test.cjs
 node --check day-03-pocket-tasks/tasks.js
 node --check day-03-pocket-tasks/app.js
 node --test day-03-pocket-tasks/tests/tasks.test.cjs
+node --check day-05-typing-sprint/sprint.js
+node --check day-05-typing-sprint/app.js
+node --test day-05-typing-sprint/tests/sprint.test.cjs
 cd day-02-breakout
 .venv/bin/python -m unittest discover -s tests -v
 cd ../day-04-maze-explorer

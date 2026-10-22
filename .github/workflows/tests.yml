@@ -34,6 +34,19 @@ jobs:
           node --check day-03-pocket-tasks/app.js
       - name: Test task operations and saved-data validation
         run: node --test day-03-pocket-tasks/tests/tasks.test.cjs
+  typing-sprint:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: '22'
+      - name: Check JavaScript syntax
+        run: |
+          node --check day-05-typing-sprint/sprint.js
+          node --check day-05-typing-sprint/app.js
+      - name: Test scoring and deterministic session deadlines
+        run: node --test day-05-typing-sprint/tests/sprint.test.cjs
   breakout:
     runs-on: ubuntu-24.04
     strategy:

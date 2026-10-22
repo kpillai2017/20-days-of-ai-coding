@@ -33,6 +33,12 @@ These projects were created with AI coding assistance and subsequently reviewed 
 - Uses **pygame 2.6.1**, installed separately. The same LGPL and bundled-font/native-library considerations described under Day 02 apply; no pygame code or font files are vendored here.
 - No third-party game artwork, audio, tutorial source or runtime AI service is bundled. Own source and documentation are covered by the repository's MIT licence; linked references retain their authors' rights.
 
+## Day 05: Typing Sprint
+
+- Original educational typing-practice code and three original practice passages created with AI coding assistance. No third-party literary excerpts, runtime libraries, remote fonts, analytics or other assets are bundled.
+- Uses browser APIs only and does not store or upload attempts. Pasting is allowed; this is not a verified competitive typing benchmark.
+- Own code, passages and documentation are covered by the repository's MIT licence. The [Day 05 guide](day-05-typing-sprint/README.md#references-and-licence) links to learning references, which retain their authors' rights.
+
 ## Development tools
 
 Python, Node.js, GitHub Actions and their actions are external tools/services used for development and testing. Their implementations are not included in this repository; they retain their own terms and licences. See [the workflow](.github/workflows/tests.yml) for action versions.

@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <!-- Match the device width so our mobile layout uses real screen dimensions. -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>Typing Sprint · Day 05</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- Defer preserves order and waits until the HTML is parsed. No build step. -->
+  <script src="sprint.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <main>
+    <header><p class="eyebrow">20 days of AI coding / day 05</p><h1>Typing Sprint<span>.</span></h1><p class="intro">Find your rhythm. One minute, one small practice.</p></header>
+    <section class="sprint" aria-labelledby="practice-title">
+      <div class="toolbar"><h2 id="practice-title">Your practice desk</h2><label for="passage-choice">Passage <select id="passage-choice"></select></label></div>
+      <div class="stats" aria-label="Live practice statistics">
+        <div><span>Time left</span><strong id="time">60<span class="unit">s</span></strong></div>
+        <div><span>WPM</span><strong id="wpm">0.0</strong></div>
+        <div><span>Accuracy</span><strong id="accuracy">100.0%</strong></div>
+        <div><span>Correct</span><strong id="correct">0</strong></div>
+      </div>
+      <!-- A whole-text alternative avoids reading a passage as hundreds of spans. -->
+      <p id="passage-readable" class="sr-only"></p>
+      <p id="passage" class="passage" aria-hidden="true"></p>
+      <label for="typing-input">Type the passage here</label>
+      <textarea id="typing-input" rows="4" spellcheck="false" autocomplete="off" autocapitalize="off" autocorrect="off" aria-describedby="typing-help passage-readable" placeholder="Your first character starts the clock…"></textarea>
+      <p id="typing-help" class="hint">Case, punctuation and spaces count. Backspace can correct mistakes. Pasting is allowed; this is practice, not a verified benchmark.</p>
+      <div class="actions"><button id="restart" type="button">Restart attempt</button><p id="status" role="status" aria-live="polite">Ready. Type your first character to begin.</p></div>
+      <section id="results" class="results" aria-labelledby="results-title" hidden><h2 id="results-title" tabindex="-1">Attempt complete</h2><p id="result-summary"></p><p id="result-detail"></p></section>
+    </section>
+    <section class="notes" aria-labelledby="scoring-title"><h2 id="scoring-title">What do the numbers mean?</h2><p>One typing “word” is five characters, including spaces. WPM uses characters currently matching the passage at the same positions. Accuracy is correct ÷ currently entered characters—not a record of every key you pressed.</p><p>The timer continues if you switch tabs. Nothing is uploaded or saved; reload or restart discards the attempt. No global keyboard shortcuts: your normal typing keys belong to the text field.</p></section>
+    <footer>Practice over perfection. <a href="README.md">Setup &amp; controls</a> · <a href="LEARNING_GUIDE.md">Learn how it works ↗</a></footer>
+    <noscript><p>Enable JavaScript to run the timer and score your typing.</p></noscript>
+  </main>
+</body>
+</html>
