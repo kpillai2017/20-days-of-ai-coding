@@ -71,6 +71,8 @@ A vertex is `[x,y,z]`:
 
 `box()` creates eight corner points and six rectangular faces. `quad()` splits a rectangle into two triangles. `tube()` makes round parts from short surface segments; arbitrary endpoints let the connecting rod tilt with the crank.
 
+The crankshaft is built as two separated main-journal segments, two offset webs and a crank pin. The rod stays in the centre plane between the webs. A continuous on-axis tube across that plane would intersect the rod at bottom dead centre; tests inspect the actual emitted primitives to guard against this mistake.
+
 The tube builder finds an axis, then two perpendicular vectors around that axis. Sine/cosine combine those vectors to create rings of vertices. A partial angular range leaves only the rear half-cylinder, creating a genuine opening instead of a fully opaque cylinder hiding the piston.
 
 Increasing segment count makes round parts smoother but creates more triangles to sort and draw. More polygons are not free on a small CPU-side renderer.
@@ -110,13 +112,13 @@ The canvas drawing buffer scales with device-pixel ratio (capped at 2). The cont
 
 `render()` sorts triangles from far to near by average depth and paints in that order: the **painter's algorithm**. It is easy to understand, but not as robust as a depth buffer. Intersecting faces and translucent gas cues can sort imperfectly.
 
-The scene deliberately avoids relying on exact transparency for its core visibility: the cylinder's front half is removed. Arrow/label overlays are drawn last so teaching cues remain readable even when orbiting. This is intentional explanatory visibility, not physically correct occlusion.
+The scene deliberately avoids relying on exact transparency for its core visibility: the cylinder's front half is removed. Arrow overlays are drawn last so flow cues remain visible even when orbiting. Stroke text is a fixed HTML overlay beside the piston, not a label attached to moving geometry. This is intentional explanatory visibility, not physically correct occlusion.
 
 ## 9. Arrow timing and captions
 
 The model returns flags such as `intakeOpen`, `transferOpen` and `spark`. `build()` only adds the appropriate arrows/geometry for those flags. Flow points are a list of XYZ coordinates; the last segment supplies the arrowhead direction.
 
-An interpolated dot travels along the projected segments. Its motion reinforces direction, but is not a particle solver. Captions explain the causal sequence in HTML while controls expose exact port/valve states.
+An interpolated dot travels along the projected segments. Its motion reinforces direction, but is not a particle solver. Fixed event captions from `getEventCaptions()` name mixture entry, spark, expansion and gas exchange; they do not travel with arrows. The detailed captions explain the causal sequence in HTML while controls expose exact port/valve states.
 
 The combustion fill is qualitative. A gold cylinder doesn't mean a measured temperature, and a force arrow doesn't calculate torque. Learn to distinguish model inputs, computed kinematics and illustrative overlays.
 

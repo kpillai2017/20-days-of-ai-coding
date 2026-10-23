@@ -102,8 +102,44 @@
       charge: angle < 105 ? "burnt" : angle < 120 ? "exhaust"
         : angle < 255 ? "fresh" : "compressed" };
   }
+  /** Short event captions live in the model so exact-angle tests can verify
+      what the viewer reads. Spark is an extra event, not a whole piston stroke. */
+  function getEventCaptions(mode, angle) {
+    const state = getState(mode, angle);
+    const events = [];
+    if (state.spark) events.push("Spark ignites the charge");
+    if (mode === "four") {
+      // Name actual valve states, not just the resulting flow. During the
+      // compression/power strokes both head valves seal the cylinder.
+      events.push(state.intakeOpen ? "Intake valve open; exhaust valve closed"
+        : state.exhaustOpen ? "Exhaust valve open; intake valve closed"
+        : "Both valves closed");
+      events.push({
+        intake: "Air–fuel mixture enters",
+        compression: "Air–fuel mixture is compressed",
+        power: "Expanding gases push the piston down",
+        exhaust: "Burnt gases leave the cylinder"
+      }[state.phase]);
+    } else {
+      // This two-stroke has piston ports, not intake/exhaust head valves.
+      events.push(state.exhaustOpen ? "Exhaust port open" : "Exhaust port closed");
+      events.push(state.transferOpen ? "Transfer port open" : "Transfer port closed");
+      events.push(state.crankcaseIntakeOpen ? "Crankcase reed inlet open" : "Crankcase reed inlet closed");
+      events.push({
+        power: "Expanding gases push the piston down",
+        blowdown: "Exhaust port opens: burnt gases escape",
+        scavenging: "Fresh mixture transfers from crankcase to cylinder",
+        "exhaust-closing": "Transfer port closes; exhaust is still open",
+        compression: "Trapped air–fuel mixture is compressed",
+        ignition: "Compressed charge is ready for the next power stroke"
+      }[state.phase]);
+      if (state.crankcaseIntakeOpen) events.push("Fresh mixture enters the crankcase");
+      if (state.phase === "power") events.push("Next mixture is compressed in the crankcase");
+    }
+    return events;
+  }
   const api = { CRANK_RADIUS, ROD_LENGTH, cycleDegrees, normalizedAngle,
-    crankPosition, pistonPosition, getState, getStages };
+    crankPosition, pistonPosition, getState, getStages, getEventCaptions };
   if (typeof module !== "undefined" && module.exports) module.exports = api;
   globalThis.EngineModel = api;
 })();

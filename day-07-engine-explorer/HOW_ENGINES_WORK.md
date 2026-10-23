@@ -19,6 +19,10 @@ These are simplified **spark-ignition** engines. A spark ignites an air–fuel c
             ●         crankshaft centre
 ```
 
+### Why the rod does not pass through the crankshaft
+
+A crankshaft is not a straight bar through the connecting rod. Two main journals lie on the rotation axis, one on each side of the rod. Offset webs connect them to a crank pin displaced from that axis. The connecting rod's big-end bearing surrounds that pin and moves between the webs. At bottom dead centre the rod crosses the shaft's axis in a side-view projection, but the main journals occupy different front/back positions—there is no solid main shaft there for it to hit. The renderer now models that separation explicitly.
+
 **Top dead centre (TDC)** is the highest piston position. **Bottom dead centre (BDC)** is the lowest. One stroke means one journey between them. One full crank revolution moves the piston down and back up: two strokes.
 
 Positive crank angle starts at TDC. In the first 180° the piston moves down; in the next 180° it moves up. A four-stroke cycle needs two such revolutions; piston geometry alone cannot identify which of its four processes is happening.
@@ -126,7 +130,7 @@ The motion is not a perfect sine wave: the rod-length square-root term makes pis
 
 ## 6. Read the visual cues carefully
 
-- Blue incoming mixture and red exhaust arrows show flow; gold arrows may show compression or expansion force. Labels matter.
+- Blue incoming mixture and red exhaust arrows show flow; gold arrows may show compression or expansion force. The fixed stroke caption and side explanation distinguish them.
 - Spark rays indicate an ignition event, not incoming/outgoing gas.
 - Transfer arrows start in the crankcase and finish in the cylinder, not at an external fuel source.
 - Front cylinder material is removed for a cutaway. The remaining shell, head, ports, crankcase and valves are schematic shapes, not sealed working CAD geometry.

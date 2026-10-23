@@ -67,3 +67,54 @@ test('normalization accepts negative turns but rejects invalid periods',()=>{
  assert.equal(m.normalizedAngle(-360),0);assert.equal(m.normalizedAngle(-721,720),719);
  for(const period of [0,-1,NaN,Infinity])assert.throws(()=>m.normalizedAngle(0,period));
 });
+
+test('fixed event captions follow intake, spark, power and exhaust',()=>{
+ assert.ok(m.getEventCaptions('four',90).includes('Air–fuel mixture enters'));
+ assert.ok(m.getEventCaptions('four',355).includes('Spark ignites the charge'));
+ assert.ok(m.getEventCaptions('four',450).includes('Expanding gases push the piston down'));
+ assert.ok(m.getEventCaptions('four',630).includes('Burnt gases leave the cylinder'));
+ assert.ok(!m.getEventCaptions('four',270).some(s=>s.includes('Spark')));
+});
+test('two-stroke event captions distinguish transfer and crankcase induction',()=>{
+ assert.ok(m.getEventCaptions('two',150).includes('Fresh mixture transfers from crankcase to cylinder'));
+ assert.ok(m.getEventCaptions('two',245).includes('Transfer port closes; exhaust is still open'));
+ assert.ok(m.getEventCaptions('two',290).includes('Fresh mixture enters the crankcase'));
+ assert.ok(m.getEventCaptions('two',355).includes('Spark ignites the charge'));
+});
+test('crank main journals and webs clear the connecting rod plane throughout a turn',()=>{
+ // Record renderer primitives without a DOM or graphics library. This tests the
+ // geometry the renderer actually emits, not a separate unused clearance value.
+ const vm=require('node:vm'),fs=require('node:fs'),path=require('node:path');
+ const context={EngineModel:m};vm.createContext(context);
+ vm.runInContext(fs.readFileSync(path.join(__dirname,'../renderer.js'),'utf8'),context);
+ const renderer=new context.EngineRenderer({getContext:()=>({})});
+ for(let angle=0;angle<360;angle+=5){
+  const tubes=[];renderer.tube=(a,b,radius,color)=>tubes.push({a,b,radius,color});
+  renderer.box=()=>{};renderer.arrow=()=>{};renderer.label=()=>{};
+  const state=m.getState('four',angle);renderer.build(state,0);
+  const rod=tubes.find(t=>t.color==='#acbed0'&&t.a[1]===state.pistonY&&t.b[1]===state.crank.y);
+  assert.ok(rod);assert.equal(rod.a[2],0);assert.equal(rod.b[2],0);
+  const journals=tubes.filter(t=>t.a[0]===0&&t.b[0]===0&&t.a[1]===0&&t.b[1]===0&&t.radius===0.12);
+  assert.equal(journals.length,2);
+  for(const journal of journals){
+   assert.ok(journal.a[2]*journal.b[2]>0,'no central shaft across rod plane');
+   assert.ok(Math.min(Math.abs(journal.a[2]),Math.abs(journal.b[2]))>rod.radius);
+  }
+  const webs=tubes.filter(t=>t.radius===0.14);
+  assert.equal(webs.length,2);
+  for(const web of webs)assert.ok(Math.abs(web.a[2])>web.radius+rod.radius);
+  const pin=tubes.find(t=>t.a[0]===state.crank.x&&t.a[1]===state.crank.y&&t.a[2]===-0.32&&t.b[2]===0.32);
+  assert.ok(pin,'offset crank pin connects the webs at the rod big end');
+ }
+});
+
+test('fixed captions name head-valve and piston-port states accurately',()=>{
+ assert.ok(m.getEventCaptions('four',90).includes('Intake valve open; exhaust valve closed'));
+ assert.ok(m.getEventCaptions('four',630).includes('Exhaust valve open; intake valve closed'));
+ for(const a of [270,450])assert.ok(m.getEventCaptions('four',a).includes('Both valves closed'));
+ assert.ok(m.getEventCaptions('two',150).includes('Exhaust port open'));
+ assert.ok(m.getEventCaptions('two',150).includes('Transfer port open'));
+ assert.ok(m.getEventCaptions('two',245).includes('Transfer port closed'));
+ assert.ok(m.getEventCaptions('two',290).includes('Crankcase reed inlet open'));
+ assert.ok(m.getEventCaptions('two',90).includes('Crankcase reed inlet closed'));
+});

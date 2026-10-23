@@ -2,7 +2,7 @@
    geometry. Keeping them separate lets tests examine mechanics without a browser. */
 (() => {
   "use strict";
-  const {getState,getStages,cycleDegrees}=globalThis.EngineModel;
+  const {getState,getStages,cycleDegrees,getEventCaptions}=globalThis.EngineModel;
   const canvas=document.getElementById("engine-view");
   const renderer=new globalThis.EngineRenderer(canvas);
   const playButton=document.getElementById("play");
@@ -28,6 +28,15 @@
     text("angle-output",`${Math.floor(state.angle)}° / ${state.cycleDegrees}°`);
     text("angle-value",`${Math.floor(state.angle)}°`);
     text("phase-title",state.title);
+    // This caption belongs to the VIEWPORT, not a projected engine vertex:
+    // it stays still while the piston moves and while the camera orbits.
+    const down=state.crankAngle<180;
+    const stroke=mode==="four"
+      ? ["Intake stroke","Compression stroke","Power stroke","Exhaust stroke"][state.stageIndex]
+      : down?"Power / transfer stroke":"Compression / induction stroke";
+    text("stroke-name",stroke);
+    text("stroke-direction",state.pistonDirection==="turning"?"At dead centre":down?"Downstroke":"Upstroke");
+    text("stroke-events",getEventCaptions(mode,angle).join("\n"));
     // Live regions announce stage changes, not a caption at every animation frame.
     if(lastCaption!==state.caption) {text("caption",state.caption);lastCaption=state.caption;}
     text("direction",state.pistonDirection==="turning"?"At dead centre":state.pistonDirection==="down"?"Moving down ↓":"Moving up ↑");

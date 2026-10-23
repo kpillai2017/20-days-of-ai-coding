@@ -89,12 +89,26 @@
       this.tube([0,state.pistonY-0.18,0],[0,top,0],0.72,C.piston);
       // A narrow dark ring at the piston crown makes its motion easy to follow.
       this.tube([0,top-0.045,0],[0,top,0],0.735,C.dark);
+      // A real crankshaft has a dog-leg: two MAIN JOURNALS on the rotation
+      // axis, two webs, and an OFFSET crank pin between them. A continuous
+      // central tube through the rod plane would intersect the rod at BDC.
+      // Keep the rod in z=0 and both main journals outside its swept thickness.
       const crank=[state.crank.x,state.crank.y,0];
-      this.tube([0,state.pistonY,0.04],add(crank,[0,0,0.04]),0.105,C.rod);
-      this.tube([0,0,-0.36],[0,0,0.4],0.12,C.metal);
-      this.tube([0,0,-0.2],[state.crank.x,state.crank.y,-0.2],0.15,C.dark);
-      this.tube([state.crank.x,state.crank.y,-0.28],[state.crank.x,state.crank.y,0.2],0.12,C.metal);
-      this.tube([0,0,-0.5],[0,0,-0.38],0.67,C.dark);
+      this.tube([0,state.pistonY,0],crank,0.105,C.rod);
+      // Small end / wrist pin at the piston and big-end bearing on the crank pin.
+      this.tube([0,state.pistonY,-0.23],[0,state.pistonY,0.23],0.08,C.metal);
+      this.tube([0,0,-0.72],[0,0,-0.32],0.12,C.metal);
+      this.tube([0,0,0.32],[0,0,0.72],0.12,C.metal);
+      // Webs sit on either side of the rod rather than cutting across its plane.
+      for(const z of [-0.32,0.32]) {
+        this.tube([0,0,z],[state.crank.x,state.crank.y,z],0.14,C.rod);
+      }
+      this.tube([state.crank.x,state.crank.y,-0.32],
+                [state.crank.x,state.crank.y,0.32],0.105,C.metal);
+      // The bearing surrounds the offset pin; touching here is intentional.
+      this.tube([state.crank.x,state.crank.y,-0.12],
+                [state.crank.x,state.crank.y,0.12],0.18,C.rod);
+      this.tube([0,0,-0.79],[0,0,-0.69],0.67,C.rod);
       this.box([0,-0.83,0],[2.3,0.16,1.5],C.dark);
       // A translucent charge volume is only a phase cue, not a pressure field.
       const gasColor=state.burn>0.1?C.hot:state.charge==="exhaust"?C.exhaust:state.charge==="compressed"?C.hot:C.fresh;
@@ -175,9 +189,10 @@
         const f=arrow.progress*(points.length-1)-segment;
         const a=points[segment],b=points[segment+1];
         ctx.beginPath();ctx.arc(a.x+(b.x-a.x)*f,a.y+(b.y-a.y)*f,4,0,Math.PI*2);ctx.fill();
-        if(arrow.label)this.drawLabel(points[0],arrow.label,arrow.color);
+        // No text is anchored to moving arrows: a fixed HTML caption names
+        // the stroke beside the piston, keeping the mechanism uncluttered.
       }
-      for(const label of this.labels)this.drawLabel(this.project(label.point),label.text,label.color);
+      // Component labels are deliberately not drawn on moving 3D points.
       ctx.font="12px system-ui";ctx.fillStyle="#a6b9d0";
       ctx.fillText("3D cutaway · drag / arrow keys to orbit",14,this.height-16);
     }

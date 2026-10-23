@@ -23,7 +23,10 @@
       <div class="visual">
         <!-- Canvas draws projected 3D geometry. The captions and state list below
              provide text equivalents; this is not a native accessible 3D widget. -->
+        <div class="viewport">
+        <div class="stroke-caption" aria-hidden="true"><span id="stroke-direction">Downstroke</span><strong id="stroke-name">Intake stroke</strong><p id="stroke-events">Air–fuel mixture enters</p></div>
         <canvas id="engine-view" tabindex="0" aria-label="Rotatable 3D cutaway of a four-stroke engine" aria-describedby="view-help">Your browser needs HTML canvas support.</canvas>
+        </div>
         <div class="camera-tools" role="group" aria-label="Camera controls"><button id="orbit-left" type="button" aria-label="Rotate view left">←</button><button id="orbit-up" type="button" aria-label="Rotate view up">↑</button><button id="orbit-down" type="button" aria-label="Rotate view down">↓</button><button id="orbit-right" type="button" aria-label="Rotate view right">→</button><button id="zoom-in" type="button" aria-label="Zoom in">+</button><button id="zoom-out" type="button" aria-label="Zoom out">−</button><button id="reset-view" type="button">Reset view</button></div>
         <p id="view-help" class="hint">Drag or swipe to orbit · Focus the view and use arrow keys · Wheel or +/− buttons to zoom</p>
       </div>
@@ -33,7 +36,7 @@
         <p id="caption"></p>
         <dl class="state"><div><dt>Crank angle</dt><dd id="angle-value">0°</dd></div><div><dt>Piston</dt><dd id="direction">At dead centre</dd></div><div><dt id="intake-label">Intake valve</dt><dd id="intake-state"></dd></div><div><dt id="exhaust-label">Exhaust valve</dt><dd id="exhaust-state"></dd></div><div id="transfer-row" hidden><dt>Transfer port</dt><dd id="transfer-state"></dd></div><div><dt>Spark cue</dt><dd id="spark-state"></dd></div></dl>
         <div class="legend"><span class="fresh">Blue: fresh mixture</span><span class="transfer">Green: transfer from crankcase</span><span class="hot">Gold: compression / expansion / spark</span><span class="exhaust">Red: exhaust</span></div>
-        <p class="hint">Arrows are labelled net-flow or force cues, not computed fluid paths. Rear cylinder shell remains; front is cut away.</p>
+        <p class="hint">Arrows show net flow or force, not computed fluid paths. The fixed caption names the event. Rear cylinder shell remains; front is cut away.</p>
       </aside>
     </div>
     <div class="timeline"><label for="angle">Scrub cycle <output id="angle-output" for="angle">0° / 720°</output></label><input id="angle" type="range" min="0" max="719" value="0" step="1"><div id="stages" class="stages" role="group" aria-label="Jump to engine stage"></div></div>
