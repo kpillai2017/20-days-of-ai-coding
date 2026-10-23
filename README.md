@@ -15,8 +15,23 @@ Each day should include runnable code, explanatory comments, installation and us
 | 03 | [Pocket Tasks](day-03-pocket-tasks/) | HTML / CSS / JavaScript | Forms, immutable state, safe DOM rendering and browser persistence |
 | 04 | [Maze Explorer](day-04-maze-explorer/) | Python / pygame | DFS generation, backtracking, BFS pathfinding and graph invariants |
 | 05 | [Typing Sprint](day-05-typing-sprint/) | HTML / CSS / JavaScript | Text input, elapsed-time deadlines, state machines and scoring |
+| 06 | [Enigma Lab](day-06-enigma-lab/) | Python / pygame | Permutations, modular arithmetic, stateful ciphers and historical Enigma |
 
-**Days 06–20:** not built yet. Each will be a separate small project in this repository.
+**Days 07–20:** not built yet. Each will be a separate small project in this repository.
+
+## Run Day 06
+
+With Python 3.9–3.13, from the repository root on macOS/Linux:
+
+```sh
+cd day-06-enigma-lab
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install -r requirements.txt
+python main.py
+```
+
+Type or click A–Z, inspect the lamp and rotor windows, and reset before decrypting. Settings support three distinct rotors I–V, rings, initial windows and up to ten plug pairs; reflector B is fixed. **Historical learning only—not secure encryption.** See [setup and controls](day-06-enigma-lab/README.md), [mechanics](day-06-enigma-lab/HOW_ENIGMA_WORKS.md), [brief history](day-06-enigma-lab/HISTORY.md) and [beginner code tour](day-06-enigma-lab/LEARNING_GUIDE.md). Windows instructions and tests are in the day guide.
 
 ## Run Day 05
 
@@ -100,7 +115,7 @@ The root [`.gitignore`](.gitignore) applies to **all projects and future day fol
 - Check `git status --short` before staging. For an ignored path, use `git check-ignore -v path/to/file` to see which rule applies.
 - `.gitignore` does not untrack an already committed file. Review `git ls-files -ci --exclude-standard` for tracked files that now match ignore rules.
 
-All five projects separate rules from the interface: `life.js`/`app.js`, `game.py`/`main.py`, `tasks.js`/`app.js`, `maze.py`/`main.py`, and `sprint.js`/`app.js`. Refactors should preserve that separation, update each day's walkthrough, and add regression tests for changed behavior.
+All six projects separate rules from the interface: `life.js`/`app.js`, `game.py`/`main.py`, `tasks.js`/`app.js`, `maze.py`/`main.py`, `sprint.js`/`app.js`, and `enigma.py`/`main.py`. Refactors should preserve that separation, update each day's walkthrough, and add regression tests for changed behavior.
 
 ### Run all checks
 
@@ -119,6 +134,8 @@ node --test day-05-typing-sprint/tests/sprint.test.cjs
 cd day-02-breakout
 .venv/bin/python -m unittest discover -s tests -v
 cd ../day-04-maze-explorer
+.venv/bin/python -m unittest discover -s tests -v
+cd ../day-06-enigma-lab
 .venv/bin/python -m unittest discover -s tests -v
 ```
 

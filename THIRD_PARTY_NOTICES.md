@@ -39,6 +39,13 @@ These projects were created with AI coding assistance and subsequently reviewed 
 - Uses browser APIs only and does not store or upload attempts. Pasting is allowed; this is not a verified competitive typing benchmark.
 - Own code, passages and documentation are covered by the repository's MIT licence. The [Day 05 guide](day-05-typing-sprint/README.md#references-and-licence) links to learning references, which retain their authors' rights.
 
+## Day 06: Enigma Lab
+
+- Original educational simulator/prose created with AI coding assistance; historical rotor/reflector wiring and stepping are attributed to [Crypto Museum](https://www.cryptomuseum.com/crypto/enigma/wiring.htm). No museum prose, photos, historical message facsimiles or third-party source code is bundled.
+- Uses **pygame 2.6.1**, installed separately; the LGPL, default-font and native-library considerations under Day 02 apply here too.
+- A temporary development comparison used **py-enigma 1.0.2**, separately installed under its own terms. It is not vendored, imported by the application/tests or listed as a runtime dependency. [Validation notes](day-06-enigma-lab/VALIDATION.md) describe the comparison.
+- History and mechanics references retain their authors' rights. The simulator's own code/documentation are MIT-licensed. It is a historical teaching tool, not modern secure encryption or an endorsement of the regimes that used the machines.
+
 ## Development tools
 
 Python, Node.js, GitHub Actions and their actions are external tools/services used for development and testing. Their implementations are not included in this repository; they retain their own terms and licences. See [the workflow](.github/workflows/tests.yml) for action versions.
