@@ -113,3 +113,17 @@ jobs:
         run: python -m unittest discover -s tests -v
       - name: Smoke-test the real interface loop
         run: python main.py --frames 5
+  engine-explorer:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: '22'
+      - name: Check JavaScript syntax
+        run: |
+          node --check day-07-engine-explorer/engine.js
+          node --check day-07-engine-explorer/renderer.js
+          node --check day-07-engine-explorer/app.js
+      - name: Test kinematics and cycle timing
+        run: node --test day-07-engine-explorer/tests/engine.test.cjs

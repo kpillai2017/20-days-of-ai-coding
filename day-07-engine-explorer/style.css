@@ -1,0 +1,48 @@
+/* Theme tokens keep all control styling coherent and easy to experiment with. */
+:root { color-scheme: dark; --bg:#0b1220; --panel:#142033; --ink:#e9f1fc; --muted:#acc0d9; --line:#34465f; --accent:#8ddfc9; font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; color:var(--ink); background:var(--bg); }
+* { box-sizing:border-box; }
+body { margin:0; }
+main { max-width:1240px; margin:auto; padding:36px 24px; }
+.eyebrow { color:var(--accent); text-transform:uppercase; font-size:.7rem; letter-spacing:.16em; font-weight:700; }
+h1 { font-size:clamp(2.7rem,6vw,4.3rem); letter-spacing:-.055em; margin:8px 0; }
+h1 span { color:#ffce7d; }
+.intro { color:var(--muted); line-height:1.7; margin-bottom:26px; }
+.explorer { background:var(--panel); border:1px solid var(--line); border-radius:16px; overflow:hidden; }
+.toolbar { display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap; padding:16px; }
+.switch,.buttons,.camera-tools,.stages { display:flex; flex-wrap:wrap; gap:6px; }
+button { min-height:44px; font:inherit; font-size:.82rem; padding:9px 13px; border:1px solid var(--line); border-radius:7px; color:var(--ink); background:#20324a; cursor:pointer; }
+button:hover { background:#304b69; }
+button[aria-pressed="true"] { background:#235b52; border-color:var(--accent); }
+:focus-visible { outline:3px solid #ffce7d; outline-offset:3px; }
+/* Grid makes a real view/sidebar split; mobile stacks them without shrinking controls. */
+.workspace { display:grid; grid-template-columns:minmax(0,1fr) 300px; border-block:1px solid var(--line); }
+.visual { min-width:0; background:#0c1420; }
+canvas { width:100%; height:590px; display:block; touch-action:none; cursor:grab; }
+canvas:active { cursor:grabbing; }
+canvas:focus-visible { outline-offset:-4px; }
+.camera-tools { padding:12px 14px 0; }
+.camera-tools button { min-width:44px; }
+.hint { font-size:.75rem; color:var(--muted); line-height:1.65; }
+.visual>.hint { padding:0 16px 10px; }
+.explanation { padding:22px; border-left:1px solid var(--line); }
+h2 { font-size:1.3rem; margin:10px 0; line-height:1.3; }
+#caption { font-size:.88rem; line-height:1.8; min-height:145px; }
+.state { font-size:.8rem; }
+.state>div { display:flex; justify-content:space-between; gap:12px; padding:8px 0; border-bottom:1px solid var(--line); }
+dt { color:var(--muted); } dd { margin:0; text-align:right; }
+.legend { display:flex; flex-direction:column; gap:8px; font-size:.72rem; margin-top:22px; }
+.fresh { color:#66c8ff; }.transfer { color:#77e8b4; }.hot { color:#ffcb68; }.exhaust { color:#ff8d91; }
+.timeline,.speed { padding:18px 20px; }
+.timeline { border-bottom:1px solid var(--line); }
+label { font-size:.85rem; font-weight:600; display:flex; justify-content:space-between; gap:12px; }
+output { color:var(--accent); font-variant-numeric:tabular-nums; }
+input[type="range"] { width:100%; min-height:30px; accent-color:var(--accent); margin:10px 0; cursor:pointer; }
+.stages button { flex:1; font-size:.75rem; }
+.notes { padding:28px 2px; max-width:1000px; }
+.notes p { font-size:.85rem; color:var(--muted); line-height:1.85; }
+footer { border-top:1px solid var(--line); padding-top:18px; font-size:.8rem; line-height:1.9; }
+a { color:var(--accent); }
+.sr-only { position:absolute; width:1px; height:1px; overflow:hidden; clip-path:inset(50%); white-space:nowrap; }
+[hidden] { display:none !important; }
+@media(max-width:800px) { .workspace { grid-template-columns:1fr; } .explanation { border-left:0; border-top:1px solid var(--line); } #caption { min-height:0; } canvas { height:520px; } }
+@media(max-width:480px) { main { padding:24px 10px; } canvas { height:440px; } .toolbar { padding:12px; } .stages button { flex-basis:40%; } }

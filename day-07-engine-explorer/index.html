@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>Engine Explorer · Day 07</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- Deferred scripts run in this order, after document parsing. -->
+  <script src="engine.js" defer></script>
+  <script src="renderer.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+<main>
+  <header><p class="eyebrow">20 days of AI coding / day 07</p><h1>Engine Explorer<span>.</span></h1><p class="intro">Same crank. Different cycles. Turn the view and follow the flow.</p></header>
+  <section class="explorer" aria-label="Interactive three-dimensional engine animation">
+    <div class="toolbar">
+      <div class="switch" role="group" aria-label="Engine type"><button id="four" type="button" aria-pressed="true">4-stroke</button><button id="two" type="button" aria-pressed="false">2-stroke</button></div>
+      <div class="buttons"><button id="play" type="button" aria-pressed="true">Pause</button><button id="step" type="button">Step 15°</button><button id="reset-cycle" type="button">Reset cycle</button></div>
+    </div>
+    <div class="workspace">
+      <div class="visual">
+        <!-- Canvas draws projected 3D geometry. The captions and state list below
+             provide text equivalents; this is not a native accessible 3D widget. -->
+        <canvas id="engine-view" tabindex="0" aria-label="Rotatable 3D cutaway of a four-stroke engine" aria-describedby="view-help">Your browser needs HTML canvas support.</canvas>
+        <div class="camera-tools" role="group" aria-label="Camera controls"><button id="orbit-left" type="button" aria-label="Rotate view left">←</button><button id="orbit-up" type="button" aria-label="Rotate view up">↑</button><button id="orbit-down" type="button" aria-label="Rotate view down">↓</button><button id="orbit-right" type="button" aria-label="Rotate view right">→</button><button id="zoom-in" type="button" aria-label="Zoom in">+</button><button id="zoom-out" type="button" aria-label="Zoom out">−</button><button id="reset-view" type="button">Reset view</button></div>
+        <p id="view-help" class="hint">Drag or swipe to orbit · Focus the view and use arrow keys · Wheel or +/− buttons to zoom</p>
+      </div>
+      <aside class="explanation" aria-labelledby="phase-title">
+        <p class="eyebrow" id="cycle-label">720° · two crank revolutions</p>
+        <h2 id="phase-title">Intake</h2>
+        <p id="caption"></p>
+        <dl class="state"><div><dt>Crank angle</dt><dd id="angle-value">0°</dd></div><div><dt>Piston</dt><dd id="direction">At dead centre</dd></div><div><dt id="intake-label">Intake valve</dt><dd id="intake-state"></dd></div><div><dt id="exhaust-label">Exhaust valve</dt><dd id="exhaust-state"></dd></div><div id="transfer-row" hidden><dt>Transfer port</dt><dd id="transfer-state"></dd></div><div><dt>Spark cue</dt><dd id="spark-state"></dd></div></dl>
+        <div class="legend"><span class="fresh">Blue: fresh mixture</span><span class="transfer">Green: transfer from crankcase</span><span class="hot">Gold: compression / expansion / spark</span><span class="exhaust">Red: exhaust</span></div>
+        <p class="hint">Arrows are labelled net-flow or force cues, not computed fluid paths. Rear cylinder shell remains; front is cut away.</p>
+      </aside>
+    </div>
+    <div class="timeline"><label for="angle">Scrub cycle <output id="angle-output" for="angle">0° / 720°</output></label><input id="angle" type="range" min="0" max="719" value="0" step="1"><div id="stages" class="stages" role="group" aria-label="Jump to engine stage"></div></div>
+    <div class="speed"><label for="speed">Animation speed <output id="speed-output" for="speed">1.0×</output></label><input id="speed" type="range" min="0.1" max="2" value="1" step="0.1"><span class="hint">1× = one crank revolution per 4 seconds (slow teaching speed, not real RPM).</span></div>
+    <p id="announcement" class="sr-only" role="status" aria-live="polite"></p>
+  </section>
+  <section class="notes"><h2>Choose a mechanism, not just a label</h2><p><strong>4-stroke:</strong> intake, compression, power and exhaust over 720°, using head valves. <strong>2-stroke:</strong> a crankcase-scavenged, piston-ported spark-ignition example over 360°. Its descending piston compresses the next crankcase charge; uncovered ports allow transfer and exhaust near the bottom.</p><p>Idealised timing, constant crank speed, no real gas pressure, temperatures or combustion dynamics. This does not describe all two-stroke engines (especially diesels). Animation pauses initially if you prefer reduced motion.</p></section>
+  <footer><a href="README.md">Setup &amp; controls</a> · <a href="HOW_ENGINES_WORK.md">How the engines work</a> · <a href="LEARNING_GUIDE.md">Beginner code tour</a></footer>
+  <noscript><p>Enable JavaScript for animation. The mechanics guide can still be read without it.</p></noscript>
+</main>
+</body>
+</html>

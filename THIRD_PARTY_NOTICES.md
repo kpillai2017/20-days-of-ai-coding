@@ -46,6 +46,12 @@ These projects were created with AI coding assistance and subsequently reviewed 
 - A temporary development comparison used **py-enigma 1.0.2**, separately installed under its own terms. It is not vendored, imported by the application/tests or listed as a runtime dependency. [Validation notes](day-06-enigma-lab/VALIDATION.md) describe the comparison.
 - History and mechanics references retain their authors' rights. The simulator's own code/documentation are MIT-licensed. It is a historical teaching tool, not modern secure encryption or an endorsement of the regimes that used the machines.
 
+## Day 07: Engine Explorer
+
+- Original code, procedural 3D shapes, flow overlays and explanatory prose created with AI coding assistance; no third-party libraries, meshes, artwork, fonts or sound are bundled.
+- Browser-native Canvas2D draws a software-projected 3D cutaway. Mechanics references in [the day guide](day-07-engine-explorer/README.md#references-and-licence) retain their authors' rights.
+- Own code and documentation are MIT-licensed. Cycle timings and flow cues are illustrative; the app is not validated engineering design software or a universal model of every engine type.
+
 ## Development tools
 
 Python, Node.js, GitHub Actions and their actions are external tools/services used for development and testing. Their implementations are not included in this repository; they retain their own terms and licences. See [the workflow](.github/workflows/tests.yml) for action versions.

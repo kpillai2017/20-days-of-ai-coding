@@ -16,8 +16,15 @@ Each day should include runnable code, explanatory comments, installation and us
 | 04 | [Maze Explorer](day-04-maze-explorer/) | Python / pygame | DFS generation, backtracking, BFS pathfinding and graph invariants |
 | 05 | [Typing Sprint](day-05-typing-sprint/) | HTML / CSS / JavaScript | Text input, elapsed-time deadlines, state machines and scoring |
 | 06 | [Enigma Lab](day-06-enigma-lab/) | Python / pygame | Permutations, modular arithmetic, stateful ciphers and historical Enigma |
+| 07 | [Engine Explorer](day-07-engine-explorer/) | HTML / CSS / JavaScript | 3D projection, slider-crank kinematics and two-/four-stroke cycles |
 
-**Days 07–20:** not built yet. Each will be a separate small project in this repository.
+**Days 08–20:** not built yet. Each will be a separate small project in this repository.
+
+## Run Day 07
+
+Open `day-07-engine-explorer/index.html` directly, or serve that folder using `python3 -m http.server 8000 --bind 127.0.0.1` and visit **http://localhost:8000** (Windows: use `py`). Switch between two-/four-stroke engines, pause/scrub the cycle and drag or use arrow buttons/keys to orbit the real 3D cutaway. No runtime libraries or build step.
+
+See [setup and controls](day-07-engine-explorer/README.md), [engine mechanics](day-07-engine-explorer/HOW_ENGINES_WORK.md) and [beginner code tour](day-07-engine-explorer/LEARNING_GUIDE.md). This is an idealised teaching model, not an engineering/combustion simulation. Test from the repository root with `node --test day-07-engine-explorer/tests/engine.test.cjs`.
 
 ## Run Day 06
 
@@ -115,7 +122,7 @@ The root [`.gitignore`](.gitignore) applies to **all projects and future day fol
 - Check `git status --short` before staging. For an ignored path, use `git check-ignore -v path/to/file` to see which rule applies.
 - `.gitignore` does not untrack an already committed file. Review `git ls-files -ci --exclude-standard` for tracked files that now match ignore rules.
 
-All six projects separate rules from the interface: `life.js`/`app.js`, `game.py`/`main.py`, `tasks.js`/`app.js`, `maze.py`/`main.py`, `sprint.js`/`app.js`, and `enigma.py`/`main.py`. Refactors should preserve that separation, update each day's walkthrough, and add regression tests for changed behavior.
+All seven projects separate rules from the interface: `life.js`/`app.js`, `game.py`/`main.py`, `tasks.js`/`app.js`, `maze.py`/`main.py`, `sprint.js`/`app.js`, `enigma.py`/`main.py`, and `engine.js`/`renderer.js`/`app.js`. Refactors should preserve that separation, update each day's walkthrough, and add regression tests for changed behavior.
 
 ### Run all checks
 
@@ -131,6 +138,9 @@ node --test day-03-pocket-tasks/tests/tasks.test.cjs
 node --check day-05-typing-sprint/sprint.js
 node --check day-05-typing-sprint/app.js
 node --test day-05-typing-sprint/tests/sprint.test.cjs
+node --check day-07-engine-explorer/renderer.js
+node --check day-07-engine-explorer/app.js
+node --test day-07-engine-explorer/tests/engine.test.cjs
 cd day-02-breakout
 .venv/bin/python -m unittest discover -s tests -v
 cd ../day-04-maze-explorer
