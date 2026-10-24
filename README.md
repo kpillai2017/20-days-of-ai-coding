@@ -17,8 +17,15 @@ Each day should include runnable code, explanatory comments, installation and us
 | 05 | [Typing Sprint](day-05-typing-sprint/) | HTML / CSS / JavaScript | Text input, elapsed-time deadlines, state machines and scoring |
 | 06 | [Enigma Lab](day-06-enigma-lab/) | Python / pygame | Permutations, modular arithmetic, stateful ciphers and historical Enigma |
 | 07 | [Engine Explorer](day-07-engine-explorer/) | HTML / CSS / JavaScript | 3D projection, slider-crank kinematics and two-/four-stroke cycles |
+| 08 | [Koan Garden](day-08-koan-garden/) | HTML / CSS / JavaScript | Rule-based writing, keyword matching, safe DOM rendering and reflective interpretation |
 
-**Days 08–20:** not built yet. Each will be a separate small project in this repository.
+**Days 09–20:** not built yet. Each will be a separate small project in this repository.
+
+## Run Day 08
+
+Open `day-08-koan-garden/index.html` directly, or serve that folder with `python3 -m http.server 8000 --bind 127.0.0.1` (Windows: `py`) and visit **http://127.0.0.1:8000**. Enter a statement or question to compose an original koan-inspired passage, then reveal a possible reading and reflection questions. Works offline using transparent English keyword rules, not a runtime AI model. No accounts, packages or saved entries.
+
+See [setup and limitations](day-08-koan-garden/README.md), [beginner code tour](day-08-koan-garden/LEARNING_GUIDE.md) and [koan background](day-08-koan-garden/ABOUT_KOANS.md). The passages are creative prompts, not traditional Zen koans or authoritative teachings. Test from the repository root with `node --test day-08-koan-garden/tests/koan.test.cjs` (Node.js 22+).
 
 ## Run Day 07
 

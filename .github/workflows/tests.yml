@@ -8,6 +8,19 @@ on:
 permissions:
   contents: read
 jobs:
+  koan-garden:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: '22'
+      - name: Check JavaScript syntax
+        run: |
+          node --check day-08-koan-garden/koan.js
+          node --check day-08-koan-garden/app.js
+      - name: Test contextual writing and input boundaries
+        run: node --test day-08-koan-garden/tests/koan.test.cjs
   pixel-life:
     runs-on: ubuntu-24.04
     steps:

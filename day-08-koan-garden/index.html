@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="An offline, koan-inspired writing and reflection tool. Day 8 of 20 Days of AI Coding.">
+  <title>Koan Garden · Day 08</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- defer waits for HTML parsing, then runs these scripts IN ORDER. -->
+  <script src="koan.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <main>
+    <header>
+      <p class="eyebrow">DAY 08 · 20 DAYS OF AI CODING</p>
+      <h1>Koan Garden</h1>
+      <p class="intro">Bring a question. Leave a little room around the answer.</p>
+      <p>Original, koan-inspired passages for reflection—not traditional Zen koans or authoritative teachings.</p>
+    </header>
+
+    <section class="panel" aria-labelledby="input-heading">
+      <h2 id="input-heading">What is on your mind?</h2>
+      <form id="koan-form">
+        <label for="context">A statement or question</label>
+        <textarea id="context" name="context" rows="4" maxlength="600" required aria-describedby="input-help counter error" placeholder="Why do I need everything to be perfect?"></textarea>
+        <div class="input-meta"><span id="input-help">English theme matching · stays in this tab · no AI service</span><span id="counter">0 / 600</span></div>
+        <p id="error" class="error" role="alert"></p>
+        <div class="actions"><button type="submit">Grow a koan</button><button id="clear" type="button" class="secondary">Clear</button></div>
+      </form>
+      <div class="examples" aria-label="Example questions">
+        <span>Try:</span>
+        <button type="button" class="example" data-example="Why do I need everything to be perfect?">Perfection</button>
+        <button type="button" class="example" data-example="How can I face an uncertain decision?">Uncertainty</button>
+        <button type="button" class="example" data-example="I feel too busy to notice today.">Time</button>
+      </div>
+    </section>
+
+    <!-- A short live status is less overwhelming than announcing every line. -->
+    <p id="status" class="status" role="status" aria-live="polite"></p>
+    <article id="result" class="panel result" aria-labelledby="koan-title" hidden>
+      <p class="eyebrow" id="theme"></p>
+      <h2 id="koan-title" tabindex="-1"></h2>
+      <div id="passage" class="passage"></div>
+      <p class="quiet" id="matching-note"></p>
+      <button type="button" class="secondary" id="another">Another telling</button>
+      <p class="quiet" id="variation"></p>
+      <!-- Native details provides keyboard-accessible disclosure without
+           recreating buttons, aria-expanded and hidden-state logic ourselves. -->
+      <details id="reflection">
+        <summary>Explore a possible meaning</summary>
+        <h3>One possible reading</h3>
+        <p id="reading"></p>
+        <h3>Questions to sit with</h3>
+        <ol id="questions"></ol>
+        <h3>A small practice</h3>
+        <p id="practice"></p>
+        <p class="quiet">You can disagree with the reading or set this prompt aside. This is a creative exercise, not counselling or advice for urgent decisions.</p>
+      </details>
+    </article>
+
+    <footer>
+      <p><strong>How it works:</strong> local vocabulary rules choose imagery, and your input selects a starting composition without being quoted. Each generation skips passages already shown in this session. No language model, network requests, tracking or saved entries.</p>
+      <p>A koan is a practice case rooted in Chinese Chan and Japanese Zen traditions—not simply a puzzle with a hidden solution. This app only borrows a literary form.</p>
+      <p><a href="ABOUT_KOANS.md">About koans</a> · <a href="README.md">Setup and limitations</a> · <a href="LEARNING_GUIDE.md">Learn the code</a></p>
+    </footer>
+  </main>
+</body>
+</html>

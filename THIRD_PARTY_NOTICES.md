@@ -52,6 +52,13 @@ These projects were created with AI coding assistance and subsequently reviewed 
 - Browser-native Canvas2D draws a software-projected 3D cutaway. Mechanics references in [the day guide](day-07-engine-explorer/README.md#references-and-licence) retain their authors' rights.
 - Own code and documentation are MIT-licensed. Cycle timings and flow cues are illustrative; the app is not validated engineering design software or a universal model of every engine type.
 
+## Day 08: Koan Garden
+
+- Original, AI-assisted code, writing ingredients and educational documentation. No third-party koan translations, literary excerpts, libraries, fonts, images or audio are bundled.
+- Uses browser APIs and local English keyword/template rules, not a runtime AI service. Entries are not stored or uploaded by the app.
+- Koan-inspired creative prompts are not traditional Zen cases, formal Buddhist instruction or counselling. Background references in [the day guide](day-08-koan-garden/ABOUT_KOANS.md) retain their authors' rights and imply no endorsement.
+- Own code and prose are covered by the repository's MIT licence.
+
 ## Development tools
 
 Python, Node.js, GitHub Actions and their actions are external tools/services used for development and testing. Their implementations are not included in this repository; they retain their own terms and licences. See [the workflow](.github/workflows/tests.yml) for action versions.
