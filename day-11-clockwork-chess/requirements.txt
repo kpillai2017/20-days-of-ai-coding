@@ -1,0 +1,2 @@
+# Rules/search are stdlib-only; Pygame provides window, polygons and audio.
+pygame==2.6.1

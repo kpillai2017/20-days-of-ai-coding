@@ -72,6 +72,12 @@ These projects were created with AI coding assistance and subsequently reviewed 
 - Uses separately installed **pygame 2.6.1**; the Day 02 LGPL, bundled-default-font and native-library notes also apply. No additional font files, images, sounds or executable packages are distributed.
 - Own implementation and documentation use the repository MIT licence. Background and technical links in [the README](day-10-sudoku-studio/README.md#references-origins-and-licence) retain their authors' rights. No article prose or historical puzzle scans are reproduced.
 
+## Day 11: Clockwork Chess
+
+- Clear Python rewrite inspired by selected algorithms in Richard Allbert / Bluefever Software's [VICE11 source](https://github.com/bluefeversoft/vice/tree/main/Vice11/src). Upstream MIT copyright **2022 bluefeversoft** and permission/disclaimer are retained in full in [VICE_LICENSE.txt](day-11-clockwork-chess/VICE_LICENSE.txt). See [source mapping](day-11-clockwork-chess/SOURCE_NOTES.md) for reviewed files, differences and scope. Root MIT does not supersede the upstream notice.
+- Original Python implementation, procedural piece meshes, animated effects, generated PCM sounds and educational prose were created with AI assistance. No VICE binaries/books, commercial Battle Chess sprites/models/sound recordings or logos are bundled. Third-party names identify inspiration; no affiliation or endorsement is claimed.
+- Uses separately installed **pygame 2.6.1**; Day 02's LGPL, default-font and native-library notes apply. Linked publications retain their own rights. No packaged executable or vendored dependency is distributed.
+
 ## Development tools
 
 Python, Node.js, GitHub Actions and their actions are external tools/services used for development and testing. Their implementations are not included in this repository; they retain their own terms and licences. See [the workflow](.github/workflows/tests.yml) for action versions.

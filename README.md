@@ -20,8 +20,15 @@ Each day should include runnable code, explanatory comments, installation and us
 | 08 | [Koan Garden](day-08-koan-garden/) | HTML / CSS / JavaScript | Rule-based writing, keyword matching, safe DOM rendering and reflective interpretation |
 | 09 | [Vector Tanks](day-09-vector-tanks/) | Python / pygame | First-person wireframes, 3D projection, swept collisions, tank controls and enemy AI |
 | 10 | [Sudoku Studio](day-10-sudoku-studio/) | Python / pygame | Backtracking, MRV search, unique generation, pencil notes and undo |
+| 11 | [Clockwork Chess](day-11-clockwork-chess/) | Python / pygame | VICE-inspired legal moves, alpha–beta search, 2D/3D views, character capture animation and sound |
 
-**Days 11–20:** not built yet. Each will be a separate small project in this repository.
+**Days 12–20:** not built yet. Each will be a separate small project in this repository.
+
+## Run Day 11
+
+See [Clockwork Chess setup and controls](day-11-clockwork-chess/README.md). Install `pygame==2.6.1` in a virtual environment and run `python main.py` from `day-11-clockwork-chess`. Play the computer or another local player with switchable 2D/3D views (V), original medieval-style characters, six piece-specific capture styles and synthesised sound. The clear Python engine follows selected VICE techniques, with upstream MIT attribution retained; this is not VICE feature parity or a Battle Chess asset recreation.
+
+Read the [beginner guide](day-11-clockwork-chess/LEARNING_GUIDE.md) and [source/licence mapping](day-11-clockwork-chess/SOURCE_NOTES.md).
 
 ## Run Day 10
 
