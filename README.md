@@ -18,8 +18,15 @@ Each day should include runnable code, explanatory comments, installation and us
 | 06 | [Enigma Lab](day-06-enigma-lab/) | Python / pygame | Permutations, modular arithmetic, stateful ciphers and historical Enigma |
 | 07 | [Engine Explorer](day-07-engine-explorer/) | HTML / CSS / JavaScript | 3D projection, slider-crank kinematics and two-/four-stroke cycles |
 | 08 | [Koan Garden](day-08-koan-garden/) | HTML / CSS / JavaScript | Rule-based writing, keyword matching, safe DOM rendering and reflective interpretation |
+| 09 | [Vector Tanks](day-09-vector-tanks/) | Python / pygame | First-person wireframes, 3D projection, swept collisions, tank controls and enemy AI |
 
-**Days 09–20:** not built yet. Each will be a separate small project in this repository.
+**Days 10–20:** not built yet. Each will be a separate small project in this repository.
+
+## Run Day 09
+
+See [Vector Tanks setup and controls](day-09-vector-tanks/README.md). Install `pygame==2.6.1` in a virtual environment, then run `python main.py` from `day-09-vector-tanks`. Press Enter to deploy, use arrows/WASD to drive and Space to fire. Cabinet-inspired independent tracks use T/G (left) and U/J (right). Includes radar, wireframe cover, three enemy types and original synthesised audio. This is an original Battlezone (1980)-inspired tribute, not a ROM-accurate recreation or official Atari product.
+
+Start with the [beginner code guide](day-09-vector-tanks/LEARNING_GUIDE.md) and [history/fidelity notes](day-09-vector-tanks/HISTORY.md).
 
 ## Run Day 08
 

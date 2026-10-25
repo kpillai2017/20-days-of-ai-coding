@@ -59,6 +59,13 @@ These projects were created with AI coding assistance and subsequently reviewed 
 - Koan-inspired creative prompts are not traditional Zen cases, formal Buddhist instruction or counselling. Background references in [the day guide](day-08-koan-garden/ABOUT_KOANS.md) retain their authors' rights and imply no endorsement.
 - Own code and prose are covered by the repository's MIT licence.
 
+## Day 09: Vector Tanks
+
+- Original Battlezone-inspired educational tank game; code, procedural wireframe meshes, scenery and synthesised sound were created for this project with AI coding assistance. No Atari ROMs, source, artwork, logos, model data, fonts or recordings are bundled.
+- Battlezone and Atari names identify historical inspiration. Third-party brand and original-game rights remain with their respective owners; no affiliation or endorsement is implied. The repository MIT licence covers our own implementation, not those rights.
+- Uses separately installed **pygame 2.6.1**; the LGPL, bundled default-font and native-library notes under Day 02 also apply here. No packaged executable or vendored dependency is distributed.
+- Historical and technical reference links in [the guide](day-09-vector-tanks/README.md#references-and-licence) retain their authors' rights. No reference text or manual scans are reproduced.
+
 ## Development tools
 
 Python, Node.js, GitHub Actions and their actions are external tools/services used for development and testing. Their implementations are not included in this repository; they retain their own terms and licences. See [the workflow](.github/workflows/tests.yml) for action versions.

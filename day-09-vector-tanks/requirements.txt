@@ -1,0 +1,2 @@
+# Window, keyboard, vector drawing and optional audio; game.py uses stdlib only.
+pygame==2.6.1
