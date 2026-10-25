@@ -1,0 +1,2 @@
+# Display, keyboard and mouse; sudoku.py itself uses only Python's stdlib.
+pygame==2.6.1

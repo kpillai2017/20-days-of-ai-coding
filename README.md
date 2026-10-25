@@ -19,8 +19,15 @@ Each day should include runnable code, explanatory comments, installation and us
 | 07 | [Engine Explorer](day-07-engine-explorer/) | HTML / CSS / JavaScript | 3D projection, slider-crank kinematics and two-/four-stroke cycles |
 | 08 | [Koan Garden](day-08-koan-garden/) | HTML / CSS / JavaScript | Rule-based writing, keyword matching, safe DOM rendering and reflective interpretation |
 | 09 | [Vector Tanks](day-09-vector-tanks/) | Python / pygame | First-person wireframes, 3D projection, swept collisions, tank controls and enemy AI |
+| 10 | [Sudoku Studio](day-10-sudoku-studio/) | Python / pygame | Backtracking, MRV search, unique generation, pencil notes and undo |
 
-**Days 10–20:** not built yet. Each will be a separate small project in this repository.
+**Days 11–20:** not built yet. Each will be a separate small project in this repository.
+
+## Run Day 10
+
+See [Sudoku Studio setup and controls](day-10-sudoku-studio/README.md). Install `pygame==2.6.1` in a virtual environment, then run `python main.py` from `day-10-sudoku-studio`. Generate Easy/Medium/Hard puzzles, enter digits, use pencil marks/hints/undo, or enter a custom board and solve it. Generated grids have exactly one solution; difficulty labels use documented clue-count bands rather than guaranteed human-technique grades.
+
+Read the [beginner algorithm and UI guide](day-10-sudoku-studio/LEARNING_GUIDE.md) to learn backtracking, uniqueness checks and responsive background search.
 
 ## Run Day 09
 

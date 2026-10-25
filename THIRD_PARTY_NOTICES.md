@@ -66,6 +66,12 @@ These projects were created with AI coding assistance and subsequently reviewed 
 - Uses separately installed **pygame 2.6.1**; the LGPL, bundled default-font and native-library notes under Day 02 also apply here. No packaged executable or vendored dependency is distributed.
 - Historical and technical reference links in [the guide](day-09-vector-tanks/README.md#references-and-licence) retain their authors' rights. No reference text or manual scans are reproduced.
 
+## Day 10: Sudoku Studio
+
+- Original AI-assisted Python source, puzzle generator and educational prose. Puzzles are generated locally; no third-party puzzle collection or solver implementation is bundled.
+- Uses separately installed **pygame 2.6.1**; the Day 02 LGPL, bundled-default-font and native-library notes also apply. No additional font files, images, sounds or executable packages are distributed.
+- Own implementation and documentation use the repository MIT licence. Background and technical links in [the README](day-10-sudoku-studio/README.md#references-origins-and-licence) retain their authors' rights. No article prose or historical puzzle scans are reproduced.
+
 ## Development tools
 
 Python, Node.js, GitHub Actions and their actions are external tools/services used for development and testing. Their implementations are not included in this repository; they retain their own terms and licences. See [the workflow](.github/workflows/tests.yml) for action versions.
