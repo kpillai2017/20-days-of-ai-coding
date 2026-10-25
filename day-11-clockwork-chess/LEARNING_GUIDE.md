@@ -2,6 +2,21 @@
 
 This is a small teaching engine, not a grandmaster program. Follow one move through the files before trying to understand the entire search tree. Source comments explain the tricky boundaries; this guide connects them.
 
+## Before reading: Python notation used in the source
+
+Every application function/class now has a nearby docstring explaining its job, with inline notes at the less obvious steps. A docstring is the triple-quoted string immediately inside a definition; `help(Position.legal_moves)` can display it in Python. A `#` comment explains the adjacent implementation but does not execute.
+
+- `self` is the current object: `self.board` belongs to one Position, not every game.
+- `None` means no result/square/pending job; it is different from square index `0` (a1). Use `is None`, not a truth test, when zero is valid.
+- A tuple such as `(file, rank)` groups coordinates; unpacking gives each a name.
+- A comprehension builds a list/set from matching items. Read it as a compact loop; the surrounding comments identify what is being filtered.
+- `yield` emits a candidate lazily; `return` finishes a function. Move generation materialises its generator before temporarily changing the board.
+- `try/finally` guarantees cleanup even on timeout, while `try/except` handles an error. That distinction is crucial in recursive make/unmake.
+- Nested search helpers close over the search's local position/deadline; `nonlocal nodes` permits updating the shared node counter.
+- A `Future` is a handle to worker work. Calling `done()` checks without waiting; calling `result()` before completion would block.
+
+Start with the smaller `animation.py`, then the controller's click/preview/commit path, then legal rules, then search. Run the tests before and after an experiment. This readability pass changed comments/docstrings/formatting only: executable syntax trees were compared with the previous revision after removing docstrings.
+
 ## 1. Three responsibilities
 
 ```text

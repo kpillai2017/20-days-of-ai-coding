@@ -85,6 +85,19 @@ The engine uses a 64-square list rather than VICE's 120-square mailbox. Search u
 
 ## Tests and learning
 
+### Suggested first reading
+
+The source is deliberately expanded for beginners: every function/class in the four application modules has a docstring, and inline comments explain non-obvious transitions rather than simply repeating statements. Dense semicolon-separated code has been expanded into conventional blocks; tests use the same readable formatting.
+
+1. Read `animation.smooth` and `animation.pose` for a small pure-function example.
+2. Follow `App.click` → `App.animate` → `App.update` to see one move preview and commit.
+3. Read `Position.legal_moves`, `push` and `pop` to understand king safety and undo.
+4. Read `search` last: its nested helpers share a working position and cancellation state.
+5. Use the walkthrough below for camera maths, sound samples and the background worker.
+
+Comments explain assumptions and limitations too: `push` trusts a legal move, material draws are conservative, camera rendering is approximate, and hints are suggestions rather than guarantees.
+
+
 - [Beginner learning guide](LEARNING_GUIDE.md): board coordinates, attacks versus moves, make/unmake, search, projection, animation and sound.
 - [VICE source notes](SOURCE_NOTES.md): algorithm mapping, differences and retained licence.
 - `engine.py`: standard-library-only rules/search.
