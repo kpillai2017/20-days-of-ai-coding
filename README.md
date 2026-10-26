@@ -21,8 +21,15 @@ Each day should include runnable code, explanatory comments, installation and us
 | 09 | [Vector Tanks](day-09-vector-tanks/) | Python / pygame | First-person wireframes, 3D projection, swept collisions, tank controls and enemy AI |
 | 10 | [Sudoku Studio](day-10-sudoku-studio/) | Python / pygame | Backtracking, MRV search, unique generation, pencil notes and undo |
 | 11 | [Clockwork Chess](day-11-clockwork-chess/) | Python / pygame | VICE-inspired legal moves, alpha–beta search, 2D/3D views, character capture animation and sound |
+| 12 | [Sort Lab](day-12-sort-lab/) | HTML / CSS / JavaScript | Nine sorting algorithms, lazy generators, visual playback and honest operation counters |
 
-**Days 12–20:** not built yet. Each will be a separate small project in this repository.
+**Days 13–20:** not built yet. Each will be a separate small project in this repository.
+
+## Run Day 12
+
+Open `day-12-sort-lab/index.html` directly, or see the [setup and controls](day-12-sort-lab/README.md). Explore bubble, selection, insertion, merge, quick, heap, Shell, counting and radix sort with Start/Stop/Step/Reset, speed and item sliders, and input patterns. Changing algorithm preserves the original dataset for comparison. The dashboard shows operation captions, pseudocode, counters and variant-specific complexity.
+
+Read the [algorithm field guide](day-12-sort-lab/ALGORITHMS.md) and [beginner code tour](day-12-sort-lab/LEARNING_GUIDE.md). Tests: `node --test day-12-sort-lab/tests/algorithms.test.cjs` (Node.js 22+).
 
 ## Run Day 11
 

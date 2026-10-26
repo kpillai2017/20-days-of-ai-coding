@@ -78,6 +78,12 @@ These projects were created with AI coding assistance and subsequently reviewed 
 - Original Python implementation, procedural piece meshes, animated effects, generated PCM sounds and educational prose were created with AI assistance. No VICE binaries/books, commercial Battle Chess sprites/models/sound recordings or logos are bundled. Third-party names identify inspiration; no affiliation or endorsement is claimed.
 - Uses separately installed **pygame 2.6.1**; Day 02's LGPL, default-font and native-library notes apply. Linked publications retain their own rights. No packaged executable or vendored dependency is distributed.
 
+## Day 12: Sort Lab
+
+- Original AI-assisted HTML/CSS/JavaScript, diagrams and educational prose implementing standard sorting techniques. No third-party algorithm source, libraries, fonts, images or datasets are bundled.
+- Uses browser DOM/generator/animation APIs; no runtime AI, external requests, analytics or persistent entries. Own implementation and prose use the root MIT licence.
+- Background links in [the README](day-12-sort-lab/README.md#references-and-licence) retain their authors' rights; no article text is reproduced. Numeric test-oracle sorting uses JavaScript's native sort only in tests, not in the nine implementations.
+
 ## Development tools
 
 Python, Node.js, GitHub Actions and their actions are external tools/services used for development and testing. Their implementations are not included in this repository; they retain their own terms and licences. See [the workflow](.github/workflows/tests.yml) for action versions.

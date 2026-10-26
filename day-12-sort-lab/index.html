@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Explore nine sorting algorithms, one visible step at a time.">
+  <title>Sort Lab · Day 12</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- defer preserves order and waits for the HTML before reading elements. -->
+  <script src="algorithms.js" defer></script><script src="app.js" defer></script>
+</head>
+<body>
+<main>
+  <header><div><p class="eyebrow">DAY 12 / 20 DAYS OF AI CODING</p><h1>Sort <span>Lab.</span></h1><p>Nine ways to turn disorder into understanding.</p></div><span class="badge">NO FRAMEWORKS · JUST CURIOSITY</span></header>
+  <section class="controls panel" aria-label="Sorting controls">
+    <label>Algorithm<select id="algorithm"></select></label>
+    <label>Input pattern<select id="pattern"><option value="random">Random</option><option value="nearly">Nearly sorted</option><option value="reversed">Reversed</option><option value="sorted">Already sorted</option><option value="few-unique">Few unique values</option></select></label>
+    <label>Items <output id="count-label" for="count">48</output><input id="count" type="range" min="8" max="128" value="48"></label>
+    <label>Speed <output id="speed-label" for="speed">60 steps/s</output><input id="speed" type="range" min="1" max="300" value="60"></label>
+    <div class="buttons"><button id="start" class="primary">Start</button><button id="stop">Stop</button><button id="step">Step</button><button id="reset">Reset</button><button id="shuffle">New data</button></div>
+    <p class="help">Stop pauses in place. Reset restores the same input. New data generates the chosen pattern. Changing algorithm also reuses the same input.</p>
+  </section>
+  <section class="workspace">
+    <div class="panel visual">
+      <div class="chart-heading"><h2 id="chart-title">Bubble Sort</h2><span id="state" class="badge">Ready</span></div>
+      <div id="chart" role="img" aria-label="Sorting values shown as vertical bars"></div>
+      <div class="legend"><span><i class="normal"></i>Unfixed</span><span><i class="active"></i>Active</span><span><i class="sorted"></i>Final position</span></div>
+      <div class="metrics"><div><strong id="comparisons">0</strong><span>Key comparisons</span></div><div><strong id="writes">0</strong><span>Main writes</span></div><div><strong id="swaps">0</strong><span>Swaps</span></div><div><strong id="aux">0</strong><span>Aux writes</span></div><div><strong id="steps">0</strong><span>Steps shown</span></div></div>
+      <p id="note" class="note">Choose an algorithm, then Start or Step.</p>
+      <details><summary>Current values (text alternative)</summary><p id="values" class="values"></p></details>
+      <p id="status" role="status" aria-live="polite" class="help"></p>
+    </div>
+    <aside class="panel lesson" aria-labelledby="lesson-title">
+      <p class="eyebrow">UNDER THE HOOD</p><h2 id="lesson-title"></h2><p id="description"></p>
+      <dl id="complexity"></dl><h3>How it works</h3><p id="explanation"></p>
+      <h3>Follow the pseudocode</h3><ol id="code" class="code"></ol>
+      <p class="help">Highlighted pseudocode is a teaching sketch, not every JavaScript line. Active bars can indicate comparison, reading or writing; read the caption for the exact operation.</p>
+    </aside>
+  </section>
+  <section class="panel notes"><h2>Read the motion, not just the result.</h2><p>Try insertion sort on nearly sorted data; compare quick sort on random and already sorted data. Counting and radix use keys and digits rather than pairwise placement comparisons. Their auxiliary work still counts.</p><p>n = item count, k = key range, d = digit count, b = radix base (10). Complexity describes the algorithm—not the animation snapshots, DOM drawing, or simulated speed. Stability means preserving the order of equal-key records; identical bars cannot demonstrate that property by themselves.</p><p><a href="README.md">Run &amp; controls</a> · <a href="ALGORITHMS.md">Nine algorithm explanations</a> · <a href="LEARNING_GUIDE.md">Learn the code</a></p></section>
+  <footer>Original code and diagrams · MIT · local and offline · no uploads, tracking or stored entries</footer>
+</main>
+</body></html>

@@ -8,6 +8,19 @@ on:
 permissions:
   contents: read
 jobs:
+  sort-lab:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: '22'
+      - name: Check sorting JavaScript syntax
+        run: |
+          node --check day-12-sort-lab/algorithms.js
+          node --check day-12-sort-lab/app.js
+      - name: Test nine sorting algorithms and event invariants
+        run: node --test day-12-sort-lab/tests/algorithms.test.cjs
   clockwork-chess:
     runs-on: ubuntu-24.04
     strategy:
