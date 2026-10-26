@@ -22,8 +22,15 @@ Each day should include runnable code, explanatory comments, installation and us
 | 10 | [Sudoku Studio](day-10-sudoku-studio/) | Python / pygame | Backtracking, MRV search, unique generation, pencil notes and undo |
 | 11 | [Clockwork Chess](day-11-clockwork-chess/) | Python / pygame | VICE-inspired legal moves, alpha–beta search, 2D/3D views, character capture animation and sound |
 | 12 | [Sort Lab](day-12-sort-lab/) | HTML / CSS / JavaScript | Nine sorting algorithms, lazy generators, visual playback and honest operation counters |
+| 13 | [Horologium](day-13-clockwork/) | HTML / CSS / JavaScript | Local-time analog clock, procedural brass/walnut artwork, pendulum and synthesised chimes |
 
-**Days 13–20:** not built yet. Each will be a separate small project in this repository.
+**Days 14–20:** not built yet. Each will be a separate small project in this repository.
+
+## Run Day 13
+
+Open `day-13-clockwork/index.html` directly. Enjoy an original walnut-cased clock illustration with ivory dial, exposed brass gears, weights and pendulum, synchronised to your device's local time. The original 2D view is labelled v0.1; toggle to the separate v0.2 solid 3D view, left-drag to rotate freely and reset its default camera. Enable sound for tick/tock, quarter phrases and hourly 1–12 strikes. Preview controls, volume, glass/labels, sweep seconds and reduced-motion support are included. This is a visual model, not a physics-accurate mechanism.
+
+See [setup/audio behaviour](day-13-clockwork/README.md), [mechanism explanation](day-13-clockwork/MECHANISM.md) and [beginner code tour](day-13-clockwork/LEARNING_GUIDE.md). The requested Clock3D reference is inspiration only; no source/assets were reused.
 
 ## Run Day 12
 

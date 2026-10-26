@@ -8,6 +8,24 @@ on:
 permissions:
   contents: read
 jobs:
+  clockwork:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: '22'
+      - name: Check clock JavaScript syntax
+        run: |
+          node --check day-13-clockwork/clock.js
+          node --check day-13-clockwork/renderer.js
+          node --check day-13-clockwork/gears.js
+          node --check day-13-clockwork/camera.js
+          node --check day-13-clockwork/renderer3d.js
+          node --check day-13-clockwork/audio.js
+          node --check day-13-clockwork/app.js
+      - name: Test local-time clock and chime scheduling
+        run: node --test day-13-clockwork/tests/*.cjs
   sort-lab:
     runs-on: ubuntu-24.04
     steps:

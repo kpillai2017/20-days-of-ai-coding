@@ -84,6 +84,12 @@ These projects were created with AI coding assistance and subsequently reviewed 
 - Uses browser DOM/generator/animation APIs; no runtime AI, external requests, analytics or persistent entries. Own implementation and prose use the root MIT licence.
 - Background links in [the README](day-12-sort-lab/README.md#references-and-licence) retain their authors' rights; no article text is reproduced. Numeric test-oracle sorting uses JavaScript's native sort only in tests, not in the nine implementations.
 
+## Day 13: Horologium
+
+- Original AI-assisted Canvas artwork, code and synthesised ticks/bell tones; no downloaded models, textures, icons, samples or fonts. Own work uses the repository MIT licence.
+- The requested [Clock3D reference](https://github.com/OetkenPurveyorOfCode/Clock3D) was reviewed as visual inspiration only. As reviewed on 26 October 2026, its README says GPLv3 but its root LICENSE contains AGPLv3, and its model/sound/icon credits have separate terms. No reference source/assets were copied, ported or bundled; this project does not rely on or resolve that discrepancy. See [provenance notes](day-13-clockwork/README.md#reference-project-and-rights).
+- Uses native Canvas/Web Audio APIs only; no third-party runtime libraries, network time service, analytics or stored entries. Linked publications retain their authors' rights and imply no endorsement.
+
 ## Development tools
 
 Python, Node.js, GitHub Actions and their actions are external tools/services used for development and testing. Their implementations are not included in this repository; they retain their own terms and licences. See [the workflow](.github/workflows/tests.yml) for action versions.

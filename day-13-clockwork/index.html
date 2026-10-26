@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="An original walnut-and-brass mechanical clock illustration, synced to local time with synthesised ticks and chimes."
+    />
+    <title>Horologium · Day 13</title>
+    <link rel="stylesheet" href="style.css" />
+    <!-- Browser scripts load in dependency order after parsing the document. -->
+    <script src="clock.js" defer></script>
+    <script src="gears.js" defer></script>
+    <script src="renderer.js" defer></script>
+    <script src="camera.js" defer></script>
+    <script src="renderer3d.js" defer></script>
+    <script src="audio.js" defer></script>
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <main>
+      <header>
+        <p class="eyebrow">DAY XIII / 20 DAYS OF AI CODING</p>
+        <h1>Horologium<span>.</span></h1>
+        <p>A little theatre of brass, walnut and passing time.</p>
+      </header>
+      <div class="layout">
+        <section class="clock-stage" aria-label="Mechanical clock illustration">
+          <canvas
+            id="clock"
+            tabindex="0"
+            width="860"
+            height="1120"
+            role="img"
+            aria-label="Analog clock with animated gears and pendulum. Current time is shown as text beside it."
+            >Your browser does not support canvas. The current time is available
+            in the text display.</canvas
+          >
+        </section>
+        <aside>
+          <section class="panel">
+            <p class="eyebrow">YOUR LOCAL TIME</p>
+            <time id="time">--:--:--</time>
+            <p id="date"></p>
+            <p id="zone" class="muted"></p>
+            <span class="badge" id="sync">LIVE · SYSTEM CLOCK</span>
+            <p class="help">
+              Hands are read from your device's clock every frame. This app does
+              not set your system time or contact a time server.
+            </p>
+          </section>
+          <section class="panel" aria-labelledby="controls">
+            <h2 id="controls">The listening room</h2>
+            <button id="sound" class="primary">Enable sound</button>
+            <div class="control">
+              <label for="volume">Volume</label
+              ><output id="volume-value" for="volume">35%</output
+              ><input id="volume" type="range" min="0" max="100" value="35" />
+            </div>
+            <label class="check"
+              ><input id="ticks" type="checkbox" checked /> Tick &amp;
+              tock</label
+            ><label class="check"
+              ><input id="chimes" type="checkbox" checked /> Quarter-hour chimes
+              &amp; hour strikes</label
+            >
+            <div class="preview">
+              <button id="preview-quarter">Preview quarter</button
+              ><button id="preview-hour">Preview hour</button>
+            </div>
+            <p id="audio-status" role="status" aria-live="polite" class="help">
+              Silent until you enable sound. Preview buttons also need sound
+              enabled.
+            </p>
+            <p class="help">
+              :15 plays one phrase; :30 two; :45 three. On the hour: four
+              phrases, then one bell per hour (1–12). Hidden tabs are silent;
+              missed bells are not replayed.
+            </p>
+          </section>
+          <section class="panel">
+            <h2>Look a little closer</h2>
+            <p id="view-name" class="badge">2D · v0.1</p>
+            <div class="preview">
+              <button id="view-toggle">Switch to 3D</button
+              ><button id="reset-view" disabled>Reset 3D view</button>
+            </div>
+            <p class="help">
+              3D: left-click and drag in any direction to orbit (touch drag
+              works too). Focus the clock and use arrows; Home resets. View
+              changes never change time or sound.
+            </p>
+            <label class="check"
+              ><input id="labels" type="checkbox" /> Show mechanism
+              labels</label
+            ><label class="check"
+              ><input id="glass" type="checkbox" checked /> Glass
+              reflections</label
+            ><label class="check"
+              ><input id="sweep" type="checkbox" /> Sweep second hand</label
+            ><label class="check"
+              ><input id="motion" type="checkbox" checked /> Animate
+              mechanism</label
+            ><button id="sync-now">Sync / refresh time</button>
+            <p class="help">
+              Disabling mechanism motion still keeps the hands correct.
+              Reduced-motion preferences start with a still mechanism.
+            </p>
+          </section>
+          <section class="panel lesson">
+            <p class="eyebrow">HOW A CLOCK KEEPS TIME</p>
+            <h2>Energy, release, rhythm.</h2>
+            <p>
+              A weight supplies energy. A train of gears transmits rotation. The
+              escapement releases it in small steps while returning energy to
+              the pendulum. The pendulum's rhythm regulates the mechanism.
+            </p>
+            <p>
+              Here the dependency is reversed: your system time drives the
+              picture. The gear ratios suggest meshing wheels, but they do not
+              physically drive the hands. This is a didactic visual model, not a
+              working mechanical design.
+            </p>
+            <p><a href="MECHANISM.md">Explore the mechanism →</a></p>
+          </section>
+        </aside>
+      </div>
+      <footer>
+        <a href="README.md">Run &amp; controls</a> ·
+        <a href="LEARNING_GUIDE.md">Learn the code</a> · Original procedural
+        artwork &amp; sound · MIT
+      </footer>
+    </main>
+  </body>
+</html>
