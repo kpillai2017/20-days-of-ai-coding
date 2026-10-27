@@ -90,6 +90,12 @@ These projects were created with AI coding assistance and subsequently reviewed 
 - The requested [Clock3D reference](https://github.com/OetkenPurveyorOfCode/Clock3D) was reviewed as visual inspiration only. As reviewed on 26 October 2026, its README says GPLv3 but its root LICENSE contains AGPLv3, and its model/sound/icon credits have separate terms. No reference source/assets were copied, ported or bundled; this project does not rely on or resolve that discrepancy. See [provenance notes](day-13-clockwork/README.md#reference-project-and-rights).
 - Uses native Canvas/Web Audio APIs only; no third-party runtime libraries, network time service, analytics or stored entries. Linked publications retain their authors' rights and imply no endorsement.
 
+## Day 14: Monopoly
+
+- Original AI-assisted Python/Pygame implementation, geometric board artwork and didactic prose studying classic British Monopoly (London edition). Property names, stations and rent values are from the classic British London edition. No commercial board/card scans, logos, mascot, token models, recorded sounds or third-party game engine code are bundled.
+- Monopoly is a Hasbro trademark. London place names identify the British board; no exclusive ownership of ordinary place names is asserted. This project is independent and is not affiliated with, endorsed by or licensed by Hasbro. The repository MIT licence covers our original implementation/prose only, not rights in third-party marks, game presentation or linked rulebooks. Educational purpose is not asserted to provide universal permission; no legal clearance claim is made.
+- Uses separately installed pygame 2.6.1; the Day 02 LGPL, default-font and native-library notes apply. The Hasbro instruction catalogue and a supplemental official US rulebook are linked as references, not redistributed. See [references](day-14-monopoly/REFERENCES.md) and [edition/implementation limits](day-14-monopoly/RULES.md).
+
 ## Development tools
 
 Python, Node.js, GitHub Actions and their actions are external tools/services used for development and testing. Their implementations are not included in this repository; they retain their own terms and licences. See [the workflow](.github/workflows/tests.yml) for action versions.

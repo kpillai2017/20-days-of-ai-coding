@@ -23,8 +23,15 @@ Each day should include runnable code, explanatory comments, installation and us
 | 11 | [Clockwork Chess](day-11-clockwork-chess/) | Python / pygame | VICE-inspired legal moves, alpha–beta search, 2D/3D views, character capture animation and sound |
 | 12 | [Sort Lab](day-12-sort-lab/) | HTML / CSS / JavaScript | Nine sorting algorithms, lazy generators, visual playback and honest operation counters |
 | 13 | [Horologium](day-13-clockwork/) | HTML / CSS / JavaScript | Local-time analog clock, procedural brass/walnut artwork, pendulum and synthesised chimes |
+| 14 | [Monopoly](day-14-monopoly/) | Python / pygame | Classic British Monopoly (London), rule state machines, auctions, trading, finite resources and local human/computer seats |
 
-**Days 14–20:** not built yet. Each will be a separate small project in this repository.
+**Days 15–20:** not built yet. Each will be a separate small project in this repository.
+
+## Run Day 14
+
+See [Monopoly setup and controls](day-14-monopoly/README.md). Install pygame in a virtual environment, then run `python main.py` from `day-14-monopoly`. Configure 2–6 local human/computer seats, or use `--demo` for four computer players. Includes property auctions, trades with consent, mortgages, buildings, jail, cards, debt and bankruptcy. Implements the British London edition with classic property names, stations and pound sterling. Read [rules and explicit fidelity limits](day-14-monopoly/RULES.md): this educational implementation is not certified rules-perfect or an official licensed product.
+
+Follow the [beginner code tour](day-14-monopoly/LEARNING_GUIDE.md) and [references/rights notes](day-14-monopoly/REFERENCES.md).
 
 ## Run Day 13
 
