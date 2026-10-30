@@ -108,7 +108,7 @@ Because reflector B has no self-connections, the complete machine has no letter 
 
 - Hardware could support up to 13 plug pairs; this app deliberately limits input to ten, a common military operating choice. Historical practices varied.
 - `process()` ignores non-ASCII characters without stepping. Real operators followed service/date-specific conventions for spacing, numbers and message indicators; this app does not reproduce those procedures.
-- The lamp stays lit on the last output for study rather than only while holding a key.
+- The lamp glows while a key is held and fades after release. Its warm glow and 240 ms rotor scroll are illustrative; the last output stays in the study readout.
 - Input/output histories and signal traces are teaching additions. Backspace in keyboard mode does not undo a keypress or rotor state.
 - No sound, saved messages, network or cryptanalysis tools are included.
 

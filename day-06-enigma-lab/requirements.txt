@@ -1,2 +1,4 @@
 # The model/tests use Python alone. Only the graphical interface needs pygame.
 pygame==2.6.1
+# Optional renderer dependency; 2D and cipher tests still work without it.
+PyOpenGL==3.1.10

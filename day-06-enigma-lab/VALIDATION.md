@@ -41,3 +41,22 @@ This was a development experiment, not a runtime dependency, a CI network requir
 A reciprocal cipher can still be historically wrong. Round trips alone are therefore not enough; keep fixed outputs, window sequences and independent checks when changing the model.
 
 Own notes: [MIT licence](../LICENSE). Reference software and linked material retain their own rights.
+
+## Physical-view regression checks
+
+New headless tests cover key down/up, mouse release, focus loss, repeat-event
+rejection, lamp fade, reset, rapid reference-vector typing, actual double-step
+window transitions and read-only rendering at multiple animation times.
+The original pure cipher model is unchanged. Rendering was visually inspected
+at an intermediate rotor step; this is not a claim of measured dimensional
+accuracy or historical machine certification.
+
+## OpenGL view validation
+
+The expanded suite has **41 tests** across cipher, interface, animation, camera
+and fallback. The new camera tests require no OpenGL. SDL dummy checks verify
+that unavailable contexts fall back to a working 2D window. A real macOS OpenGL
+compatibility context was also exercised: 3D rendering, camera orbit, emissive
+lamp/rotor appearance, and repeated 3D → 2D → 3D context recreation. A rendered
+frame was visually reviewed. This is platform-specific smoke evidence, not a
+guarantee for every graphics driver or accessibility certification.

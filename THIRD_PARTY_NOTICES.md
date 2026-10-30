@@ -112,3 +112,13 @@ These projects were created with AI coding assistance and subsequently reviewed 
 ## Development tools
 
 Python, Node.js, GitHub Actions and their actions are external tools/services used for development and testing. Their implementations are not included in this repository; they retain their own terms and licences. See [the workflow](.github/workflows/tests.yml) for action versions.
+
+## Day 06 optional 3D renderer
+
+- PyOpenGL 3.1.10 is separately installed for the optional Pygame/OpenGL view,
+  under its [BSD-style licence](https://github.com/mcfletch/pyopengl/blob/master/license.txt).
+  OpenGL/GLU drivers/system libraries are supplied by the user's platform.
+- The wooden-case model, key/lamp geometry, rotor rings and 2D physical-view art
+  are original procedural artwork under the root MIT licence. No third-party
+  models, photographs, historical insignia, textures or font files are bundled.
+  This is an Enigma-inspired illustration, not a certified historical replica.

@@ -150,3 +150,51 @@ A wrong reciprocal machine could still decrypt its own ciphertext. Stronger chec
 Python references: [classes](https://docs.python.org/3/tutorial/classes.html), [data structures](https://docs.python.org/3/tutorial/datastructures.html), [unittest](https://docs.python.org/3/library/unittest.html). History references are in [HISTORY.md](HISTORY.md).
 
 Own code/docs: [MIT licence](../LICENSE); dependencies and linked references retain their own licences, as explained in [third-party notices](../THIRD_PARTY_NOTICES.md).
+
+## Physical-looking art, separate from cipher state
+
+`appearance.py` draws the carry case, metal deck, rotor windows, lamps and
+round keys from primitives. Dark offset circles suggest a key stem; ivory disks
+and an edge highlight suggest a raised keycap. The depressed key moves down
+a few pixels. Alpha-blended concentric circles make a warm lamp halo without
+an image asset. Clipping a moving letter strip to a rotor window lets the old
+and new letters slide through a single aperture; stationary wheels do not roll.
+
+`Lab.press()` remembers the previous windows, then calls `encode_letter()`
+exactly once. It snapshots a timestamp for presentation, not encryption.
+`animation()` returns rotor progress, key depression and lamp brightness from
+elapsed milliseconds. Key-up, mouse-up or focus loss releases the visual key
+without touching rotors or transcripts. Repeated keydown events are ignored.
+The last result remains available even after the physical-looking lamp fades.
+
+Rapid typing replaces the current visual transition; it is not queued cipher
+work. Model tests still prove the same reference vectors, while animation tests
+check release, double-stepping, settings isolation and read-only rendering.
+
+## From a flat drawing to OpenGL
+
+`scene3d.py` keeps camera maths independent of OpenGL imports. World coordinates
+use x across the keyboard, y upward and z toward the operator. `Camera.basis()`
+builds forward/right/up vectors with dot and cross products. Perspective shrinks
+objects with distance; `project()` uses the same field of view and viewport as
+OpenGL, letting a short click select a projected key. Dragging beyond six pixels
+orbits instead. Camera distance/elevation are bounded for a usable view.
+
+`Renderer` builds boxes and capped cylinders, applies normals, depth testing and
+a directional-looking point light. Keys combine stems and round caps; the
+active key changes height. Lamp emission adds visible brightness without changing
+the cipher. Rotor drums and knurls rotate about their x axles. Each alphabet
+letter is a cached alpha texture placed tangent to a ring. The top plaque gives
+an easy-to-read logical position even while the ring is moving.
+
+`view3d.View` owns the display context. Switching modes disposes GPU textures
+and quadrics BEFORE destroying the old context. The 2D settings/trace are drawn
+into an alpha surface and uploaded as an overlay texture after the 3D scene.
+The transparent viewport lets the model show through. This reuses form logic
+without sharing cipher state between two copies: there is only one `Lab`.
+
+OpenGL imports are lazy and context creation is guarded. If it fails, recreate
+a normal Pygame window and keep the 2D interface usable. Tests exercise this
+fallback under SDL dummy, plus projection, orbit limits, click-versus-drag and
+state preservation. A real-context smoke check is needed in addition to those
+unit tests; GPU drawing cannot be proven by mocked calls alone.
