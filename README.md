@@ -24,8 +24,15 @@ Each day should include runnable code, explanatory comments, installation and us
 | 12 | [Sort Lab](day-12-sort-lab/) | HTML / CSS / JavaScript | Nine sorting algorithms, lazy generators, visual playback and honest operation counters |
 | 13 | [Horologium](day-13-clockwork/) | HTML / CSS / JavaScript | Local-time analog clock, procedural brass/walnut artwork, pendulum and synthesised chimes |
 | 14 | [Monopoly](day-14-monopoly/) | Python / pygame | Classic British Monopoly (London), rule state machines, auctions, trading, finite resources and local human/computer seats |
+| 15 | [Scrabble](day-15-scrabble/) | Python / pygame | Classic-English tile scoring, private racks, trie-based computer moves, hints and 2–4 local human/computer seats |
 
-**Days 15–20:** not built yet. Each will be a separate small project in this repository.
+**Days 16–20:** not built yet. Each will be a separate small project in this repository.
+
+## Run Day 15
+
+See [Scrabble installation and controls](day-15-scrabble/README.md). From `day-15-scrabble`, install `requirements.txt` in a virtual environment and run `python main.py`. Configure 2–4 human/computer seats, or use `--demo` for four computers. Includes previewed scoring, blanks, exchanges, passes, hints and final rack adjustments.
+
+Read [rules and compatibility limits](day-15-scrabble/RULES.md): the bundled CC0 Letterpress dictionary is not an official Scrabble lexicon, words are automatically adjudicated without challenges, and six scoreless turns end play. The project does not claim perfect compatibility with every official edition. See the [beginner code tour](day-15-scrabble/LEARNING_GUIDE.md) and [word-list provenance](day-15-scrabble/words/NOTICE.md).
 
 ## Run Day 14
 

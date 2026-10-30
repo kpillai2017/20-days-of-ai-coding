@@ -55,3 +55,6 @@ tmp_rovo_*
 .AppleDouble
 .LSOverride
 Thumbs.db
+
+# Day 15 local saved games contain private rack and bag information.
+/day-15-scrabble/saves/

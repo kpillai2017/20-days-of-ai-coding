@@ -8,6 +8,31 @@ on:
 permissions:
   contents: read
 jobs:
+  scrabble:
+    runs-on: ubuntu-24.04
+    strategy:
+      matrix:
+        python-version: ['3.9', '3.12', '3.13']
+    defaults:
+      run:
+        working-directory: day-15-scrabble
+    env:
+      SDL_VIDEODRIVER: dummy
+      SDL_AUDIODRIVER: dummy
+      PYGAME_HIDE_SUPPORT_PROMPT: '1'
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - uses: actions/setup-python@v7.0.0
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install pygame
+        run: python -m pip install -r requirements.txt
+      - name: Verify rules, computer games and private-rack UI
+        run: python -m unittest discover -s tests -v
+      - name: Smoke-test lobby and computer table
+        run: |
+          python main.py --seed 42 --frames 3
+          python main.py --demo --seed 42 --frames 10
   property-table:
     runs-on: ubuntu-24.04
     strategy:
