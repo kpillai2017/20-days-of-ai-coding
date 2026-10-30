@@ -25,8 +25,20 @@ Each day should include runnable code, explanatory comments, installation and us
 | 13 | [Horologium](day-13-clockwork/) | HTML / CSS / JavaScript | Local-time analog clock, procedural brass/walnut artwork, pendulum and synthesised chimes |
 | 14 | [Monopoly](day-14-monopoly/) | Python / pygame | Classic British Monopoly (London), rule state machines, auctions, trading, finite resources and local human/computer seats |
 | 15 | [Scrabble](day-15-scrabble/) | Python / pygame | Classic-English tile scoring, private racks, trie-based computer moves, hints and 2–4 local human/computer seats |
+| 16 | [Mastermind](day-16-mastermind/) | Python / pygame | Shaded tabletop pegs, duplicate-safe feedback, alternating maker roles and human/computer codebreaking |
 
 **Days 16–20:** not built yet. Each will be a separate small project in this repository.
+
+## Run Day 16
+
+See [Mastermind installation and controls](day-16-mastermind/README.md). From
+`day-16-mastermind`, install `requirements.txt` in a virtual environment and run
+`python main.py`. Configure two human/computer seats in any combination; `--demo`
+starts two computers. Includes a moulded-looking brown tray, shaded coloured
+pegs, black/white feedback pins, secret-code privacy curtains and a minimax
+codebreaker. The [chosen rules](day-16-mastermind/RULES.md) use four positions,
+six colours, repeated colours and ten attempts, with traditional maker scoring;
+commercial editions differ. Read the [beginner guide](day-16-mastermind/LEARNING_GUIDE.md).
 
 ## Run Day 15
 

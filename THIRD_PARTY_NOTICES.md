@@ -103,6 +103,12 @@ These projects were created with AI coding assistance and subsequently reviewed 
 - Bundled English word data: Loren Brichter's **Words / Letterpress** list, pinned commit `f4976d6a6d34beb431dec8d4b443a138f4dc8bee`, under its explicit **CC0 1.0** dedication. Full licence is preserved in [words/CC0-1.0.txt](day-15-scrabble/words/CC0-1.0.txt); exact sources, checksum and limitations are in [words/NOTICE.md](day-15-scrabble/words/NOTICE.md). This is not Collins/CSW or NWL. The initially considered ENABLE mirror is not bundled. Offline definitions are an adapted English Wiktionary/Kaikki extract under **CC BY-SA 4.0**, NOT MIT or CC0. Full licence and attribution, source checksums, transformations and measured coverage are preserved in [words/DEFINITIONS_NOTICE.md](day-15-scrabble/words/DEFINITIONS_NOTICE.md) and [CC-BY-SA-4.0.html](day-15-scrabble/words/CC-BY-SA-4.0.html). Retain attribution and share-alike terms for definition data. No runtime definition network service is used.
 - Uses separately installed pygame 2.6.1; Day 02 LGPL, font and native-library notes apply. Installed system fonts are used through Pygame with a bundled default-font fallback; no system font files are copied here. See [references](day-15-scrabble/REFERENCES.md) and [rules boundary](day-15-scrabble/RULES.md).
 
+## Day 16: Mastermind
+
+- Original AI-assisted Python/Pygame engine, candidate-only minimax codebreaker, procedural plastic-style board/peg artwork and teaching prose, under the repository MIT licence. No commercial board scans, logo, packaging, models, fonts, recorded sounds or game source are bundled.
+- Mastermind is a third-party game name/trademark, including Hasbro products. This independent educational project is not affiliated, endorsed or officially certified. MIT covers original work, not third-party marks or presentation rights; educational use is not asserted as blanket legal permission.
+- Uses separately installed pygame 2.6.1; the Day 02 LGPL/default-font/native-library notes apply. Installed system fonts are used locally, not redistributed. Rules references are linked, not copied. See [references](day-16-mastermind/REFERENCES.md), [edition boundary](day-16-mastermind/RULES.md) and [design](day-16-mastermind/DESIGN.md).
+
 ## Development tools
 
 Python, Node.js, GitHub Actions and their actions are external tools/services used for development and testing. Their implementations are not included in this repository; they retain their own terms and licences. See [the workflow](.github/workflows/tests.yml) for action versions.
